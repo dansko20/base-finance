@@ -152,3 +152,31 @@
     color: var(--color-foreground);
   }
 }
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+}
+
+@utility section-y {
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
+
+@utility label-eyebrow {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--color-muted-foreground);
+}
