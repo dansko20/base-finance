@@ -257,8 +257,8 @@ function Home_() {
                   <p className="text-[clamp(2.5rem,5vw,4rem)] font-medium leading-none">
                     <CountUp
                       to={stat.value}
-                      prefix={stat.prefix}
-                      suffix={stat.suffix}
+                      prefix={stat.prefix ?? ""}
+                      suffix={stat.suffix ?? ""}
                       decimals={stat.decimals ?? 0}
                     />
                   </p>
