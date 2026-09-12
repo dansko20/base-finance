@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DienstenRouteImport } from './routes/diensten'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DienstenRoute = DienstenRouteImport.update({
@@ -31,30 +37,34 @@ const OverOnsRoute = OverOnsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/diensten': typeof DienstenRoute
   '/over-ons': typeof OverOnsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/diensten': typeof DienstenRoute
   '/over-ons': typeof OverOnsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/diensten': typeof DienstenRoute
   '/over-ons': typeof OverOnsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/diensten' | '/over-ons'
+  fullPaths: '/' | '/contact' | '/diensten' | '/over-ons'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diensten' | '/over-ons'
-  id: '__root__' | '/' | '/diensten' | '/over-ons'
+  to: '/' | '/contact' | '/diensten' | '/over-ons'
+  id: '__root__' | '/' | '/contact' | '/diensten' | '/over-ons'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   DienstenRoute: typeof DienstenRoute
   OverOnsRoute: typeof OverOnsRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diensten': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   DienstenRoute: DienstenRoute,
   OverOnsRoute: OverOnsRoute,
 }
