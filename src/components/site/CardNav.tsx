@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
@@ -43,6 +43,11 @@ export function CardNav({ className }: { className?: string }) {
   const navRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    setExpanded(false);
+    gsap.set(navRef.current, { height: 60 });
+  }, [pathname]);
 
   const calculateHeight = () => {
     if (typeof window === "undefined") return 260;
@@ -135,6 +140,7 @@ export function CardNav({ className }: { className?: string }) {
 
           <Link
             to="/contact"
+            onClick={() => setExpanded(false)}
             className="justify-self-end rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-soft"
           >
             <span className="hidden sm:inline">Plan een gesprek</span>
