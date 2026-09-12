@@ -19,7 +19,7 @@ export function Logo({ className }: { className?: string }) {
           opacity="0.5"
         />
       </svg>
-      <span className="text-sm font-semibold tracking-[0.18em]">DHCE CAPITAL</span>
+      <span className="text-sm font-semibold">DHCE CAPITAL</span>
     </span>
   );
 }

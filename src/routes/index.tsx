@@ -86,7 +86,7 @@ function Home_() {
             height={1088}
             className="size-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/40" />
+          <div className="hero-overlay absolute inset-0" />
         </motion.div>
 
         <motion.div
@@ -97,7 +97,7 @@ function Home_() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] font-medium leading-[1.02] text-white"
+            className="max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] font-medium leading-[1.02] text-hero-foreground"
           >
             Onafhankelijk advies
             <br />
@@ -108,7 +108,7 @@ function Home_() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-6 max-w-xl text-white/80"
+            className="mt-6 max-w-xl text-hero-foreground/80"
           >
             Duurzaam, persoonlijk en zonder verkooppraatjes. Wij rekenen jouw keuzes
             door en kiezen samen de route die op lange termijn klopt.
@@ -121,7 +121,7 @@ function Home_() {
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <PillLink to="/contact">Plan een gratis kennismaking</PillLink>
-            <PillLink to="/diensten" variant="ghost" className="text-white">
+            <PillLink to="/diensten" variant="ghost" className="text-hero-foreground">
               Bekijk onze diensten
             </PillLink>
           </motion.div>
