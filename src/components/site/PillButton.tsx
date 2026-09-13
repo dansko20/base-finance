@@ -3,7 +3,16 @@ import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export type AppPath = "/" | "/diensten" | "/over-ons" | "/contact";
+export type AppPath =
+  | "/"
+  | "/diensten"
+  | "/hypotheekadvies"
+  | "/beleggingsadvies"
+  | "/rekentools"
+  | "/over-ons"
+  | "/werkwijze"
+  | "/plan-een-gesprek"
+  | "/contactgegevens";
 
 type Variant = "primary" | "outline" | "ghost";
 
