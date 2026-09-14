@@ -8,13 +8,13 @@ import { PillButton } from "@/components/site/PillButton";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Plan een gratis gesprek | DHCE Capital" },
+      { title: "Contact | BASE FINANCE" },
       {
         name: "description",
         content:
-          "Plan een gratis en vrijblijvend kennismakingsgesprek met een adviseur van DHCE Capital in Rotterdam of online.",
+          "Neem contact op met BASE FINANCE of plan een gratis en vrijblijvend kennismakingsgesprek.",
       },
-      { property: "og:title", content: "Plan een gesprek | DHCE Capital" },
+      { property: "og:title", content: "Contact | BASE FINANCE" },
       {
         property: "og:description",
         content: "Maak kennis met onafhankelijk en duurzaam financieel advies.",
@@ -47,10 +47,10 @@ function Contact() {
             </p>
             <p>
               <a
-                href="mailto:advies@dhcecapital.nl"
+                 href="mailto:advies@basefinance.nl"
                 className="transition-colors hover:text-foreground"
               >
-                advies@dhcecapital.nl
+                 advies@basefinance.nl
               </a>
             </p>
             <p>Weena 505, 3013 AL Rotterdam</p>

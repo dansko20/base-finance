@@ -12,17 +12,17 @@ import { PillLink } from "@/components/site/PillButton";
 export const Route = createFileRoute("/diensten")({
   head: () => ({
     meta: [
-      { title: "Diensten — Hypotheek, beleggen en verduurzamen | DHCE Capital" },
+      { title: "Diensten — Hypotheek en beleggen | BASE FINANCE" },
       {
         name: "description",
         content:
           "Hypotheekadvies, beleggingsadvies, verduurzamingsadvies en financiële planning. Onafhankelijk advies zonder provisie.",
       },
-      { property: "og:title", content: "Diensten | DHCE Capital" },
+      { property: "og:title", content: "Diensten | BASE FINANCE" },
       {
         property: "og:description",
         content:
-          "Hypotheekadvies, beleggingsadvies, verduurzamen en financiële planning bij DHCE Capital.",
+          "Hypotheekadvies, beleggingsadvies, verduurzamen en financiële planning bij BASE FINANCE.",
       },
     ],
   }),
@@ -124,7 +124,7 @@ function Diensten() {
                     ))}
                   </ul>
                   <div className="mt-8">
-                    <PillLink to="/contact" variant="outline">
+                    <PillLink to="/plan-een-gesprek" variant="outline">
                       Bespreek {d.title.toLowerCase()}
                     </PillLink>
                   </div>
@@ -142,7 +142,7 @@ function Diensten() {
               Niet zeker welk traject bij je past?
             </h2>
             <div className="mt-10 flex justify-center">
-              <PillLink to="/contact">Plan een gratis kennismaking</PillLink>
+              <PillLink to="/plan-een-gesprek">Plan een gratis kennismaking</PillLink>
             </div>
           </Reveal>
         </div>

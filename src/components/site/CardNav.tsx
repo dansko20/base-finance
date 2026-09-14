@@ -15,24 +15,25 @@ const items: CardNavItem[] = [
     label: "Advies",
     className: "bg-primary text-primary-foreground",
     links: [
-      { label: "Hypotheekadvies", to: "/diensten", ariaLabel: "Bekijk hypotheekadvies" },
-      { label: "Beleggingsadvies", to: "/diensten", ariaLabel: "Bekijk beleggingsadvies" },
+      { label: "Hypotheekadvies", to: "/hypotheekadvies", ariaLabel: "Bekijk hypotheekadvies" },
+      { label: "Beleggingsadvies", to: "/beleggingsadvies", ariaLabel: "Bekijk beleggingsadvies" },
+      { label: "Rekentools", to: "/rekentools", ariaLabel: "Bekijk rekentools" },
     ],
   },
   {
-    label: "DHCE Capital",
+    label: "BASE FINANCE",
     className: "bg-foreground text-background",
     links: [
-      { label: "Over ons", to: "/over-ons", ariaLabel: "Lees over DHCE Capital" },
-      { label: "Onze werkwijze", to: "/over-ons", ariaLabel: "Bekijk onze werkwijze" },
+      { label: "Over ons", to: "/over-ons", ariaLabel: "Lees over BASE FINANCE" },
+      { label: "Onze werkwijze", to: "/werkwijze", ariaLabel: "Bekijk onze werkwijze" },
     ],
   },
   {
     label: "Kennismaken",
     className: "bg-accent text-accent-foreground",
     links: [
-      { label: "Plan een gesprek", to: "/contact", ariaLabel: "Plan een gesprek" },
-      { label: "Contactgegevens", to: "/contact", ariaLabel: "Bekijk contactgegevens" },
+      { label: "Plan een gesprek", to: "/plan-een-gesprek", ariaLabel: "Plan een gesprek" },
+      { label: "Contactgegevens", to: "/contactgegevens", ariaLabel: "Bekijk contactgegevens" },
     ],
   },
 ];
@@ -134,12 +135,12 @@ export function CardNav({ className }: { className?: string }) {
             </span>
           </button>
 
-          <Link to="/" aria-label="DHCE Capital home" onClick={() => setExpanded(false)}>
+          <Link to="/" aria-label="BASE FINANCE home" onClick={() => setExpanded(false)}>
             <Logo className="text-primary" />
           </Link>
 
           <Link
-            to="/contact"
+            to="/plan-een-gesprek"
             onClick={() => setExpanded(false)}
             className="justify-self-end rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-soft"
           >

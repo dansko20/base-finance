@@ -18,15 +18,15 @@ import { PillLink } from "@/components/site/PillButton";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DHCE Capital — Onafhankelijk advies voor hypotheek en vermogen" },
+      { title: "BASE FINANCE — Advies voor hypotheek en vermogen" },
       {
         name: "description",
         content:
-          "Duurzaam en persoonlijk advies over hypotheken, beleggen en vermogen. Plan een gratis kennismaking met DHCE Capital in Rotterdam.",
+          "Duurzaam en persoonlijk advies over hypotheken, beleggen en vermogen. Plan een gratis kennismaking met BASE FINANCE in Rotterdam.",
       },
       {
         property: "og:title",
-        content: "DHCE Capital — Onafhankelijk advies voor hypotheek en vermogen",
+        content: "BASE FINANCE — Onafhankelijk advies voor hypotheek en vermogen",
       },
       {
         property: "og:description",
@@ -81,7 +81,7 @@ function Home_() {
         <motion.div style={{ y: bgY }} className="absolute inset-0 -z-10 scale-110">
           <img
             src={heroImg}
-            alt="Adviseurs van DHCE Capital in gesprek met een klant"
+            alt="Adviseurs van BASE FINANCE in gesprek met een klant"
             width={1920}
             height={1088}
             className="size-full object-cover"
@@ -120,9 +120,9 @@ function Home_() {
             transition={{ duration: 0.9, delay: 0.4 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <PillLink to="/contact">Plan een gratis kennismaking</PillLink>
-            <PillLink to="/diensten" variant="ghost" className="text-hero-foreground">
-              Bekijk onze diensten
+            <PillLink to="/plan-een-gesprek">Plan een gratis kennismaking</PillLink>
+            <PillLink to="/hypotheekadvies" variant="ghost" className="text-hero-foreground">
+              Bekijk hypotheekadvies
             </PillLink>
           </motion.div>
         </motion.div>
@@ -143,7 +143,7 @@ function Home_() {
             <Reveal delay={0.15} className="lg:pt-1">
               <div className="max-w-xl space-y-6 text-muted-foreground">
                 <p>
-                  DHCE Capital is volledig onafhankelijk. We ontvangen geen provisie van
+                  BASE FINANCE is volledig onafhankelijk. We ontvangen geen provisie van
                   geldverstrekkers of fondsen, waardoor ons advies alleen gestuurd wordt
                   door jouw situatie en jouw doelen.
                 </p>
@@ -227,7 +227,7 @@ function Home_() {
 
           <Reveal delay={0.2}>
             <div className="mt-12 flex justify-center">
-              <PillLink to="/diensten">Bekijk alle diensten</PillLink>
+              <PillLink to="/rekentools">Bekijk onze rekentools</PillLink>
             </div>
           </Reveal>
         </div>
@@ -329,7 +329,7 @@ function Home_() {
               ons kantoor in Rotterdam.
             </p>
             <div className="mt-10 flex justify-center">
-              <PillLink to="/contact">Plan een gesprek</PillLink>
+              <PillLink to="/plan-een-gesprek">Plan een gesprek</PillLink>
             </div>
           </Reveal>
         </div>

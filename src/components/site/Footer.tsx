@@ -3,9 +3,12 @@ import { Logo } from "./Logo";
 import { PillLink, type AppPath } from "./PillButton";
 
 const menu: { to: AppPath; label: string }[] = [
-  { to: "/diensten", label: "Diensten" },
+  { to: "/hypotheekadvies", label: "Hypotheekadvies" },
+  { to: "/beleggingsadvies", label: "Beleggingsadvies" },
+  { to: "/rekentools", label: "Rekentools" },
   { to: "/over-ons", label: "Over ons" },
-  { to: "/contact", label: "Contact" },
+  { to: "/werkwijze", label: "Onze werkwijze" },
+  { to: "/contactgegevens", label: "Contact" },
 ];
 
 export function Footer() {
@@ -26,14 +29,14 @@ export function Footer() {
                 </a>
               </p>
               <p>
-                <a href="mailto:advies@dhcecapital.nl" className="hover:text-foreground">
-                  advies@dhcecapital.nl
+                <a href="mailto:advies@basefinance.nl" className="hover:text-foreground">
+                  advies@basefinance.nl
                 </a>
               </p>
               <p>Weena 505, 3013 AL Rotterdam</p>
             </div>
             <div className="mt-8">
-              <PillLink to="/contact">Neem contact op</PillLink>
+              <PillLink to="/plan-een-gesprek">Neem contact op</PillLink>
             </div>
           </div>
 
@@ -53,8 +56,8 @@ export function Footer() {
           <div>
             <p className="label-eyebrow">Onze expertises</p>
             <ul className="mt-6 space-y-4 text-muted-foreground">
-              <li>Hypotheekadvies</li>
-              <li>Beleggingsadvies</li>
+              <li><Link to="/hypotheekadvies" className="transition-colors hover:text-foreground">Hypotheekadvies</Link></li>
+              <li><Link to="/beleggingsadvies" className="transition-colors hover:text-foreground">Beleggingsadvies</Link></li>
               <li>Verduurzamen &amp; energie</li>
               <li>Financiële planning</li>
             </ul>
@@ -63,7 +66,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground">
           <p>
-            © DHCE Capital B.V. {new Date().getFullYear()} · AFM-vergunning ·
+            © BASE FINANCE B.V. {new Date().getFullYear()} · AFM-vergunning ·
             KvK 87654321
           </p>
           <button
