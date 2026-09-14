@@ -187,8 +187,8 @@ export function berekenMaximaleHypotheek(
   const energielabelFactor = ENERGIELABEL_FACTOR[input.energielabel] ?? 1;
   const lastpercentageHandmatig =
     input.lastpercentageOverride !== null && input.lastpercentageOverride > 0;
-  const lastpercentage = lastpercentageHandmatig
-    ? input.lastpercentageOverride!
+  const lastpercentage = lastpercentageHandmatig && input.lastpercentageOverride !== null
+    ? input.lastpercentageOverride
     : lastpercentageTabel * energielabelFactor;
 
   // Stap 5

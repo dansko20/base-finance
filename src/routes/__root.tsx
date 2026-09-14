@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DHCE Capital — Duurzaam hypotheek- en beleggingsadvies" },
+      { title: "BASE FINANCE — Duurzaam financieel advies" },
       {
         name: "description",
         content:
-          "DHCE Capital geeft onafhankelijk en duurzaam advies over hypotheken, beleggen, verduurzamen en financiële planning.",
+          "BASE FINANCE geeft onafhankelijk en duurzaam advies over hypotheken, beleggen, verduurzamen en financiële planning.",
       },
-      { name: "author", content: "DHCE Capital" },
+      { name: "author", content: "BASE FINANCE" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
