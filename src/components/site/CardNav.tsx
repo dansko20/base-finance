@@ -108,9 +108,9 @@ export function CardNav({ className }: { className?: string }) {
     >
       <div
         ref={navRef}
-        className="relative rounded-xl border border-border/70 bg-background shadow-header"
+        className="relative rounded-xl border border-primary bg-background shadow-header"
       >
-        <div className="absolute inset-x-0 top-0 z-10 grid h-[60px] grid-cols-[1fr_auto_1fr] items-center px-3 sm:px-4">
+        <div className="absolute inset-x-0 top-0 z-10 grid h-[60px] grid-cols-[1fr_auto_1fr] items-center rounded-xl bg-primary px-3 sm:px-4">
           <button
             type="button"
             onClick={toggle}
@@ -136,13 +136,13 @@ export function CardNav({ className }: { className?: string }) {
           </button>
 
           <Link to="/" aria-label="BASE FINANCE home" onClick={() => setExpanded(false)}>
-            <Logo className="text-primary" />
+            <Logo />
           </Link>
 
           <Link
             to="/plan-een-gesprek"
             onClick={() => setExpanded(false)}
-            className="justify-self-end rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-soft"
+            className="justify-self-end rounded-lg bg-foreground px-4 py-2.5 text-sm font-medium text-background transition-all duration-300 hover:opacity-85 hover:shadow-soft"
           >
             <span className="hidden sm:inline">Plan een gesprek</span>
             <span className="sm:hidden">Contact</span>
