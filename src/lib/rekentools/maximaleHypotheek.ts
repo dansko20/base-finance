@@ -1,325 +1,161 @@
-/**
- * Rekenregels voor de maximale hypotheek (normjaar 2026).
- * Deze module bevat uitsluitend rekenlogica — geen opmaak of React.
- */
-
 import {
-  ENERGIELABEL_FACTOR,
+  ALLEENSTAANDE_INKOMENSGRENS,
+  ALLEENSTAANDE_OPSLAG,
+  ENERGIELABEL_NORMEN,
   FINANCIERINGSLAST_RENTEKOLOMMEN,
   FINANCIERINGSLAST_TABEL,
-  KOSTEN_KOPER_PERCENTAGE,
   KREDIET_MAANDLAST_FACTOR,
-  LTV_BASIS,
-  LTV_VERDUURZAMING,
-  MINIMUM_TOETSRENTE,
   NHG_KOSTENGRENS,
   NHG_KOSTENGRENS_VERDUURZAMING,
-  NHG_PREMIE,
   NORMJAAR,
-  RENTEAFTREK_TARIEF,
-  RENTEVAST_GRENS_JAREN,
-  STUDIESCHULD_FACTOR,
+  STANDAARD_LOOPTIJD_JAREN,
+  STUDIESCHULD_FACTOREN,
   VAKANTIEGELD_PERCENTAGE,
+  WEBSITE_RENTE,
   type Energielabel,
-  type Studiestelsel,
 } from "./normen2026";
 
+export type Aanvrager = {
+  brutoMaandsalaris: number;
+  dertiendeMaand: boolean;
+  anderVastInkomen: number;
+};
+
 export type MaximaleHypotheekInput = {
-  inkomen1: number;
-  inkomen2: number;
-  contract1: "vast" | "tijdelijk";
-  contract2: "vast" | "tijdelijk";
-  vakantiegeldMeerekenen: boolean;
-  eindejaarsuitkering: number; // bruto bedrag per jaar (vast)
-  eindejaarsuitkeringMeerekenen: boolean;
-
-  woningwaarde: number;
+  aanvrager1: Aanvrager;
+  aanvrager2: Aanvrager;
+  roodstandLimiet: number;
+  andereLeningen: number;
+  duoMaandbedrag: number;
   energielabel: Energielabel;
-  verduurzamen: boolean;
-
-  rentevastPeriode: number; // jaren
-  rente: number; // werkelijke rente in procent
-  looptijd: number; // jaren
-
-  studieschuld: number; // oorspronkelijk bedrag
-  studieschuldAfgelost: number;
-  studiestelsel: Studiestelsel;
-  kredietlimiet: number;
-  alimentatie: number; // per maand
-  lease: number; // per maand
-
-  eigenGeld: number;
-  kostenKoperPercentage: number;
-  overdrachtsbelastingPercentage: number;
-  /** Handmatige override van het financieringslastpercentage (in procent). */
-  lastpercentageOverride: number | null;
+  verduurzaming: number;
 };
 
 export type MaximaleHypotheekResultaat = {
   normjaar: number;
+  rente: number;
+  inkomen1: number;
+  inkomen2: number;
   toetsinkomen: number;
-  toetsrente: number;
-  toetsrenteUitleg: string;
-  lastpercentageTabel: number;
-  energielabelFactor: number;
   lastpercentage: number;
-  lastpercentageHandmatig: boolean;
-  brutoJaarlast: number;
-  brutoMaandlast: number;
+  maximaleMaandlast: number;
+  kredietlast: number;
+  studieschuldFactor: number;
   studieschuldLast: number;
-  kredietLast: number;
-  alimentatie: number;
-  lease: number;
   beschikbareMaandlast: number;
-  ltiBedrag: number;
-  ltvPercentage: number;
-  ltvBedrag: number;
-  maximaleHypotheek: number;
-  beperkendeFactor: "inkomen" | "woningwaarde";
-  beperkendeUitleg: string;
-  maandlastBruto: number;
-  maandlastNetto: number;
+  basisLening: number;
+  labelOpslag: number;
+  verduurzamingOpslag: number;
+  alleenstaandeOpslag: number;
+  zonderVerduurzaming: number;
+  metVerduurzaming: number;
+  brutoMaandlast: number;
   nhgMogelijk: boolean;
-  nhgGrens: number;
-  nhgPremie: number;
-  kostenKoper: number;
-  overdrachtsbelasting: number;
-  benodigdEigenGeld: number;
-  eigenGeldTekort: number;
-  eigenGeldVoldoende: boolean;
 };
 
-const clamp0 = (n: number) => (Number.isFinite(n) && n > 0 ? n : 0);
+const positief = (waarde: number) => Number.isFinite(waarde) && waarde > 0 ? waarde : 0;
 
-/** Stap 1 — toetsinkomen. Het tweede inkomen telt voor 100% mee. */
-export function bepaalToetsinkomen(input: MaximaleHypotheekInput): number {
-  const basis = clamp0(input.inkomen1) + clamp0(input.inkomen2);
-  const vakantiegeld = input.vakantiegeldMeerekenen ? basis * VAKANTIEGELD_PERCENTAGE : 0;
-  const eindejaar = input.eindejaarsuitkeringMeerekenen
-    ? clamp0(input.eindejaarsuitkering)
+function jaarinkomen(aanvrager: Aanvrager) {
+  const salaris = positief(aanvrager.brutoMaandsalaris);
+  return salaris * 12 * (1 + VAKANTIEGELD_PERCENTAGE)
+    + (aanvrager.dertiendeMaand ? salaris : 0)
+    + positief(aanvrager.anderVastInkomen);
+}
+
+export function zoekLastpercentage(toetsinkomen: number, rente = WEBSITE_RENTE) {
+  const rij = [...FINANCIERINGSLAST_TABEL]
+    .reverse()
+    .find((item) => toetsinkomen >= item.inkomenVanaf) ?? FINANCIERINGSLAST_TABEL[0];
+  let kolom = 0;
+  FINANCIERINGSLAST_RENTEKOLOMMEN.forEach((ondergrens, index) => {
+    if (rente >= ondergrens) kolom = index;
+  });
+  return rij?.percentages[kolom] ?? 0;
+}
+
+export function zoekStudieschuldFactor(rente = WEBSITE_RENTE) {
+  return [...STUDIESCHULD_FACTOREN]
+    .reverse()
+    .find((item) => rente >= item.renteVanaf)?.factor ?? STUDIESCHULD_FACTOREN[0].factor;
+}
+
+export function annuiteitLeenbedrag(maandlast: number, rente = WEBSITE_RENTE) {
+  const maandrente = rente / 100 / 12;
+  const maanden = STANDAARD_LOOPTIJD_JAREN * 12;
+  if (maandlast <= 0) return 0;
+  return maandrente === 0
+    ? maandlast * maanden
+    : maandlast * (1 - Math.pow(1 + maandrente, -maanden)) / maandrente;
+}
+
+export function berekenMaximaleHypotheek(input: MaximaleHypotheekInput): MaximaleHypotheekResultaat {
+  const inkomen1 = jaarinkomen(input.aanvrager1);
+  const inkomen2 = jaarinkomen(input.aanvrager2);
+  const toetsinkomen = inkomen1 + inkomen2;
+  const lastpercentage = zoekLastpercentage(toetsinkomen);
+  const maximaleMaandlast = toetsinkomen * (lastpercentage / 100) / 12;
+  const kredietlast = (positief(input.roodstandLimiet) + positief(input.andereLeningen)) * KREDIET_MAANDLAST_FACTOR;
+  const studieschuldFactor = zoekStudieschuldFactor();
+  const studieschuldLast = positief(input.duoMaandbedrag) * studieschuldFactor;
+  const beschikbareMaandlast = Math.max(0, maximaleMaandlast - kredietlast - studieschuldLast);
+  const basisLening = annuiteitLeenbedrag(beschikbareMaandlast);
+  const labelNorm = ENERGIELABEL_NORMEN[input.energielabel];
+  const labelOpslag = toetsinkomen > 0 ? labelNorm.labelOpslag : 0;
+  const verduurzamingOpslag = toetsinkomen > 0
+    ? Math.min(positief(input.verduurzaming), labelNorm.verduurzamingMax)
     : 0;
-  return basis + vakantiegeld + eindejaar;
-}
-
-/** Stap 2 — toetsrente: minimaal 5% bij een rentevastperiode korter dan 10 jaar. */
-export function bepaalToetsrente(rente: number, rentevastPeriode: number) {
-  if (rentevastPeriode < RENTEVAST_GRENS_JAREN) {
-    const toetsrente = Math.max(rente, MINIMUM_TOETSRENTE);
-    return {
-      toetsrente,
-      uitleg:
-        `De rentevastperiode is ${rentevastPeriode} jaar, korter dan ${RENTEVAST_GRENS_JAREN} jaar. ` +
-        `Daarom is wettelijk getoetst op de hoogste van de werkelijke rente (${rente.toFixed(2)}%) ` +
-        `en de minimum toetsrente (${MINIMUM_TOETSRENTE.toFixed(2)}%).`,
-    };
-  }
-  return {
-    toetsrente: rente,
-    uitleg:
-      `De rentevastperiode is ${rentevastPeriode} jaar, ${RENTEVAST_GRENS_JAREN} jaar of langer. ` +
-      `Daarom mag met de werkelijke rente van ${rente.toFixed(2)}% worden getoetst.`,
-  };
-}
-
-/** Stap 3 — financieringslastpercentage opzoeken in de Nibud-tabel. */
-export function zoekLastpercentage(toetsinkomen: number, toetsrente: number): number {
-  const rij =
-    [...FINANCIERINGSLAST_TABEL]
-      .reverse()
-      .find((r) => toetsinkomen >= r.inkomenVanaf) ?? FINANCIERINGSLAST_TABEL[0]!;
-
-  const kolommen = FINANCIERINGSLAST_RENTEKOLOMMEN;
-  const p = rij.percentages;
-  if (toetsrente <= kolommen[0]!) return p[0]!;
-  if (toetsrente >= kolommen[kolommen.length - 1]!) return p[p.length - 1]!;
-
-  for (let i = 0; i < kolommen.length - 1; i++) {
-    const lo = kolommen[i]!;
-    const hi = kolommen[i + 1]!;
-    if (toetsrente >= lo && toetsrente <= hi) {
-      const t = (toetsrente - lo) / (hi - lo);
-      return p[i]! + (p[i + 1]! - p[i]!) * t;
-    }
-  }
-  return p[p.length - 1]!;
-}
-
-/** Stap 7 — contante waarde van een annuïteit (omgekeerde annuïteitenformule). */
-export function annuiteitLeenbedrag(
-  maandlast: number,
-  jaarrente: number,
-  looptijdJaren: number,
-): number {
-  const i = jaarrente / 100 / 12;
-  const n = looptijdJaren * 12;
-  if (maandlast <= 0 || n <= 0) return 0;
-  if (i === 0) return maandlast * n;
-  return (maandlast * (1 - Math.pow(1 + i, -n))) / i;
-}
-
-/** Maandlast (annuïteit) bij een gegeven leenbedrag. */
-export function annuiteitMaandlast(
-  bedrag: number,
-  jaarrente: number,
-  looptijdJaren: number,
-): number {
-  const i = jaarrente / 100 / 12;
-  const n = looptijdJaren * 12;
-  if (bedrag <= 0 || n <= 0) return 0;
-  if (i === 0) return bedrag / n;
-  return (bedrag * i) / (1 - Math.pow(1 + i, -n));
-}
-
-export function berekenMaximaleHypotheek(
-  input: MaximaleHypotheekInput,
-): MaximaleHypotheekResultaat {
-  // Stap 1
-  const toetsinkomen = bepaalToetsinkomen(input);
-
-  // Stap 2
-  const { toetsrente, uitleg: toetsrenteUitleg } = bepaalToetsrente(
-    clamp0(input.rente),
-    clamp0(input.rentevastPeriode),
-  );
-
-  // Stap 3 + 4
-  const lastpercentageTabel = zoekLastpercentage(toetsinkomen, toetsrente);
-  const energielabelFactor = ENERGIELABEL_FACTOR[input.energielabel] ?? 1;
-  const lastpercentageHandmatig =
-    input.lastpercentageOverride !== null && input.lastpercentageOverride > 0;
-  const lastpercentage = lastpercentageHandmatig && input.lastpercentageOverride !== null
-    ? input.lastpercentageOverride
-    : lastpercentageTabel * energielabelFactor;
-
-  // Stap 5
-  const brutoJaarlast = toetsinkomen * (lastpercentage / 100);
-  const brutoMaandlast = brutoJaarlast / 12;
-
-  // Stap 6
-  const openstaandeStudieschuld = Math.max(
-    clamp0(input.studieschuld) - clamp0(input.studieschuldAfgelost),
-    0,
-  );
-  const studieschuldLast =
-    openstaandeStudieschuld * STUDIESCHULD_FACTOR[input.studiestelsel];
-  const kredietLast = clamp0(input.kredietlimiet) * KREDIET_MAANDLAST_FACTOR;
-  const alimentatie = clamp0(input.alimentatie);
-  const lease = clamp0(input.lease);
-  const beschikbareMaandlast = Math.max(
-    brutoMaandlast - studieschuldLast - kredietLast - alimentatie - lease,
-    0,
-  );
-
-  // Stap 7
-  const ltiBedrag = annuiteitLeenbedrag(beschikbareMaandlast, toetsrente, input.looptijd);
-
-  // Stap 8
-  const ltvPercentage = input.verduurzamen ? LTV_VERDUURZAMING : LTV_BASIS;
-  const ltvBedrag = clamp0(input.woningwaarde) * ltvPercentage;
-
-  // Stap 9
-  const maximaleHypotheek = Math.min(ltiBedrag, ltvBedrag);
-  const beperkendeFactor = ltiBedrag <= ltvBedrag ? "inkomen" : "woningwaarde";
-  const beperkendeUitleg =
-    beperkendeFactor === "inkomen"
-      ? "Je inkomen is de beperkende factor: op basis van de woningwaarde zou je meer kunnen lenen."
-      : "De woningwaarde is de beperkende factor: op basis van je inkomen zou je meer kunnen lenen.";
-
-  // Maandlasten bij dit bedrag (met de werkelijke rente)
-  const maandlastBruto = annuiteitMaandlast(
-    maximaleHypotheek,
-    clamp0(input.rente),
-    input.looptijd,
-  );
-  const eersteMaandRente = (maximaleHypotheek * (clamp0(input.rente) / 100)) / 12;
-  const maandlastNetto = maandlastBruto - eersteMaandRente * RENTEAFTREK_TARIEF;
-
-  // Stap 10 — NHG
-  const nhgGrens = input.verduurzamen
-    ? NHG_KOSTENGRENS_VERDUURZAMING
-    : NHG_KOSTENGRENS;
-  const nhgMogelijk = maximaleHypotheek <= nhgGrens;
-  const nhgPremie = maximaleHypotheek * NHG_PREMIE;
-
-  // Stap 11 — eigen geld en kosten koper
-  const koopsom = clamp0(input.woningwaarde);
-  const kostenKoper = koopsom * (input.kostenKoperPercentage / 100);
-  const overdrachtsbelasting = koopsom * (input.overdrachtsbelastingPercentage / 100);
-  const benodigdEigenGeld = Math.max(koopsom - maximaleHypotheek, 0) + kostenKoper;
-  const eigenGeldTekort = benodigdEigenGeld - clamp0(input.eigenGeld);
+  const alleenstaandeOpslag = inkomen2 === 0 && toetsinkomen > ALLEENSTAANDE_INKOMENSGRENS
+    ? ALLEENSTAANDE_OPSLAG
+    : 0;
+  const zonderVerduurzaming = Math.floor(basisLening + labelOpslag + alleenstaandeOpslag);
+  const metVerduurzaming = Math.floor(zonderVerduurzaming + verduurzamingOpslag);
+  const brutoMaandlast = metVerduurzaming > 0
+    ? metVerduurzaming / annuiteitLeenbedrag(1)
+    : 0;
+  const nhgGrens = verduurzamingOpslag > 0 ? NHG_KOSTENGRENS_VERDUURZAMING : NHG_KOSTENGRENS;
 
   return {
     normjaar: NORMJAAR,
+    rente: WEBSITE_RENTE,
+    inkomen1,
+    inkomen2,
     toetsinkomen,
-    toetsrente,
-    toetsrenteUitleg,
-    lastpercentageTabel,
-    energielabelFactor,
     lastpercentage,
-    lastpercentageHandmatig,
-    brutoJaarlast,
-    brutoMaandlast,
+    maximaleMaandlast,
+    kredietlast,
+    studieschuldFactor,
     studieschuldLast,
-    kredietLast,
-    alimentatie,
-    lease,
     beschikbareMaandlast,
-    ltiBedrag,
-    ltvPercentage,
-    ltvBedrag,
-    maximaleHypotheek,
-    beperkendeFactor,
-    beperkendeUitleg,
-    maandlastBruto,
-    maandlastNetto,
-    nhgMogelijk,
-    nhgGrens,
-    nhgPremie,
-    kostenKoper,
-    overdrachtsbelasting,
-    benodigdEigenGeld,
-    eigenGeldTekort,
-    eigenGeldVoldoende: eigenGeldTekort <= 0,
+    basisLening,
+    labelOpslag,
+    verduurzamingOpslag,
+    alleenstaandeOpslag,
+    zonderVerduurzaming,
+    metVerduurzaming,
+    brutoMaandlast,
+    nhgMogelijk: metVerduurzaming <= nhgGrens,
   };
 }
 
 export const DEFAULT_INPUT: MaximaleHypotheekInput = {
-  inkomen1: 52000,
-  inkomen2: 0,
-  contract1: "vast",
-  contract2: "vast",
-  vakantiegeldMeerekenen: true,
-  eindejaarsuitkering: 0,
-  eindejaarsuitkeringMeerekenen: false,
-  woningwaarde: 375000,
-  energielabel: "C",
-  verduurzamen: false,
-  rentevastPeriode: 10,
-  rente: 4.2,
-  looptijd: 30,
-  studieschuld: 0,
-  studieschuldAfgelost: 0,
-  studiestelsel: "leenstelsel",
-  kredietlimiet: 0,
-  alimentatie: 0,
-  lease: 0,
-  eigenGeld: 30000,
-  kostenKoperPercentage: KOSTEN_KOPER_PERCENTAGE,
-  overdrachtsbelastingPercentage: 2,
-  lastpercentageOverride: null,
+  aanvrager1: { brutoMaandsalaris: 3500, dertiendeMaand: false, anderVastInkomen: 0 },
+  aanvrager2: { brutoMaandsalaris: 0, dertiendeMaand: false, anderVastInkomen: 0 },
+  roodstandLimiet: 0,
+  andereLeningen: 0,
+  duoMaandbedrag: 0,
+  energielabel: "E, F of G",
+  verduurzaming: 0,
 };
 
-export const euro = (n: number) =>
-  new Intl.NumberFormat("nl-NL", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(Number.isFinite(n) ? n : 0);
+export const euro = (waarde: number) => new Intl.NumberFormat("nl-NL", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+}).format(Number.isFinite(waarde) ? waarde : 0);
 
-export const euro2 = (n: number) =>
-  new Intl.NumberFormat("nl-NL", {
-    style: "currency",
-    currency: "EUR",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Number.isFinite(n) ? n : 0);
+export const euro2 = (waarde: number) => new Intl.NumberFormat("nl-NL", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+}).format(Number.isFinite(waarde) ? waarde : 0);

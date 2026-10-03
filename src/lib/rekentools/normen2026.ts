@@ -1,152 +1,144 @@
 /**
- * Normen en percentages voor hypotheekberekeningen — NORMJAAR 2026.
- *
- * LET OP: al deze bedragen en percentages worden jaarlijks per 1 januari
- * herzien. Kopieer dit bestand bij een nieuw normjaar naar normen2027.ts en
- * pas de waarden aan; laat de bronvermelding per getal staan.
+ * Hypotheeknormen 2026, overgenomen uit de aangeleverde BASE FINANCE-rekentool.
+ * Bron: TRHK 2026, AFM, NHG en het werkblad "Normen 2026".
+ * Jaarlijks per 1 januari actualiseren.
  */
-
-/** Het normjaar waar onderstaande waarden bij horen. */
 export const NORMJAAR = 2026;
-
-/**
- * Wettelijke minimum toetsrente.
- * Bron: Tijdelijke regeling hypothecair krediet, art. 4 —
- * bij een rentevastperiode korter dan 10 jaar moet minimaal 5% worden getoetst.
- */
-export const MINIMUM_TOETSRENTE = 5; // procent
-
-/**
- * Grens voor de rentevastperiode waarboven met de werkelijke rente mag worden
- * getoetst. Bron: Tijdelijke regeling hypothecair krediet, art. 4.
- */
-export const RENTEVAST_GRENS_JAREN = 10;
-
-/**
- * Rentestanden (in procenten) waarvoor de Nibud-financieringslasttabel
- * kolommen kent. Tussenliggende rentes worden lineair geïnterpoleerd.
- * Bron: bijlage 1 Tijdelijke regeling hypothecair krediet (Nibud-tabellen).
- */
-export const FINANCIERINGSLAST_RENTEKOLOMMEN = [2, 3, 4, 5, 6, 7];
-
-/**
- * Financieringslastpercentages (in procenten van het toetsinkomen) per
- * inkomensklasse en per toetsrente.
- *
- * Dit is GEEN formule maar een wettelijke opzoektabel.
- * Bron: bijlage 1 Tijdelijke regeling hypothecair krediet (Nibud).
- * IJkpunt: modaal inkomen (± € 46.500) bij 5% toetsrente ≈ 24,6%.
- * De tabel wordt jaarlijks door het Nibud herzien.
- */
-export const FINANCIERINGSLAST_TABEL: { inkomenVanaf: number; percentages: number[] }[] = [
-  { inkomenVanaf: 0, percentages: [13.0, 13.5, 14.0, 14.5, 15.5, 16.5] },
-  { inkomenVanaf: 20000, percentages: [15.0, 15.5, 16.0, 16.5, 17.5, 18.5] },
-  { inkomenVanaf: 25000, percentages: [17.5, 18.0, 18.5, 19.0, 20.0, 21.0] },
-  { inkomenVanaf: 30000, percentages: [19.5, 20.0, 20.5, 21.0, 22.0, 23.0] },
-  { inkomenVanaf: 35000, percentages: [21.0, 21.5, 22.0, 22.5, 23.5, 24.5] },
-  { inkomenVanaf: 40000, percentages: [22.0, 22.5, 23.0, 23.5, 24.5, 25.5] },
-  { inkomenVanaf: 46500, percentages: [23.0, 23.5, 24.0, 24.6, 25.5, 26.5] },
-  { inkomenVanaf: 55000, percentages: [24.0, 24.5, 25.0, 25.5, 26.5, 27.5] },
-  { inkomenVanaf: 65000, percentages: [25.0, 25.5, 26.0, 26.5, 27.5, 28.5] },
-  { inkomenVanaf: 80000, percentages: [26.0, 26.5, 27.0, 27.5, 28.5, 29.5] },
-  { inkomenVanaf: 100000, percentages: [27.0, 27.5, 28.0, 28.5, 29.5, 30.0] },
-  { inkomenVanaf: 150000, percentages: [28.0, 28.5, 29.0, 29.5, 30.0, 30.0] },
-];
+export const MINIMUM_TOETSRENTE = 5; // TRHK art. 3 lid 9; AFM toetsrente Q4 2026.
+export const RENTEVAST_GRENS_JAREN = 10; // TRHK art. 3 lid 9.
+export const KREDIET_MAANDLAST_FACTOR = 0.02; // 2% van limiet/oorspronkelijk bedrag.
+export const STANDAARD_LOOPTIJD_JAREN = 30; // Maximale looptijd in dit model.
+export const ALLEENSTAANDE_OPSLAG = 17000; // TRHK art. 3 lid 8 (2026).
+export const ALLEENSTAANDE_INKOMENSGRENS = 30000; // Niet-AOW, TRHK art. 3 lid 8.
+export const NHG_KOSTENGRENS = 470000; // NHG-kostengrens 2026.
+export const NHG_KOSTENGRENS_VERDUURZAMING = 498200; // NHG-grens met voorzieningen.
+export const NHG_PREMIE = 0.004; // Borgtochtprovisie NHG 2026: 0,4%.
+export const WEBSITE_RENTE = 4.07; // Laagste 10 jaar vast met NHG, Geld.nl, 28-09-2026.
+export const VAKANTIEGELD_PERCENTAGE = 0.08; // Gebruikelijke 8% uit het Excel-model.
 
 export const ENERGIELABELS = [
-  "G",
-  "F",
-  "E",
-  "D",
-  "C",
-  "B",
-  "A",
-  "A+",
-  "A++",
-  "A+++",
-  "A++++",
+  "E, F of G", "C of D", "A of B", "A+ of A++", "A+++", "A++++",
+  "A++++ met energieprestatiegarantie 10 jaar",
 ] as const;
-
 export type Energielabel = (typeof ENERGIELABELS)[number];
 
-/**
- * Correctiefactor op het financieringslastpercentage per energielabel.
- * Bij een gunstig label wordt met lagere energiekosten gerekend, waardoor er
- * meer leenruimte ontstaat. Label D geldt als ijkpunt (factor 1,00);
- * label A of beter geeft circa 6% extra leenruimte.
- * Bron: energielabelregels in de Tijdelijke regeling hypothecair krediet 2026.
- */
-export const ENERGIELABEL_FACTOR: Record<Energielabel, number> = {
-  G: 0.97,
-  F: 0.98,
-  E: 0.99,
-  D: 1.0,
-  C: 1.01,
-  B: 1.02,
-  A: 1.06,
-  "A+": 1.065,
-  "A++": 1.07,
-  "A+++": 1.075,
-  "A++++": 1.08,
+/** Extra leenruimte volgens TRHK art. 4 lid 3 en 4, bedragen 2026. */
+export const ENERGIELABEL_NORMEN: Record<Energielabel, { labelOpslag: number; verduurzamingMax: number }> = {
+  "E, F of G": { labelOpslag: 0, verduurzamingMax: 20000 },
+  "C of D": { labelOpslag: 5000, verduurzamingMax: 15000 },
+  "A of B": { labelOpslag: 10000, verduurzamingMax: 10000 },
+  "A+ of A++": { labelOpslag: 20000, verduurzamingMax: 10000 },
+  "A+++": { labelOpslag: 25000, verduurzamingMax: 0 },
+  "A++++": { labelOpslag: 30000, verduurzamingMax: 0 },
+  "A++++ met energieprestatiegarantie 10 jaar": { labelOpslag: 40000, verduurzamingMax: 0 },
 };
 
-export const STUDIESTELSELS = ["oud", "leenstelsel", "nieuw"] as const;
-export type Studiestelsel = (typeof STUDIESTELSELS)[number];
+/** Studieschuldfactor over het actuele DUO-maandbedrag, TRHK art. 3a lid 2. */
+export const STUDIESCHULD_FACTOREN = [
+  { renteVanaf: 0, factor: 1.05 }, { renteVanaf: 2.001, factor: 1.10 },
+  { renteVanaf: 2.501, factor: 1.15 }, { renteVanaf: 3.001, factor: 1.20 },
+  { renteVanaf: 3.501, factor: 1.20 }, { renteVanaf: 4.001, factor: 1.25 },
+  { renteVanaf: 4.501, factor: 1.30 }, { renteVanaf: 5.001, factor: 1.30 },
+  { renteVanaf: 5.501, factor: 1.35 }, { renteVanaf: 6.001, factor: 1.40 },
+] as const;
 
-/**
- * Maandelijkse wegingsfactor over de OORSPRONKELIJKE studieschuld.
- * Bron: acceptatienormen geldverstrekkers / Nibud; jaarlijks herzien.
- * - oud stelsel (vóór 2015): 0,65% per maand
- * - leenstelsel (2015–2023): 0,45% per maand
- * - nieuw stelsel (vanaf 2023): 0,35% per maand
- */
-export const STUDIESCHULD_FACTOR: Record<Studiestelsel, number> = {
-  oud: 0.0065,
-  leenstelsel: 0.0045,
-  nieuw: 0.0035,
-};
-
-export const STUDIESTELSEL_LABEL: Record<Studiestelsel, string> = {
-  oud: "Oud stelsel (vóór 2015)",
-  leenstelsel: "Leenstelsel (2015 – 2023)",
-  nieuw: "Nieuw stelsel (vanaf 2023)",
-};
-
-/**
- * Maandlast consumptief/doorlopend krediet: 2% van de kredietlimiet per maand.
- * Bron: standaard acceptatienorm geldverstrekkers.
- */
-export const KREDIET_MAANDLAST_FACTOR = 0.02;
-
-/**
- * Maximale Loan-to-Value: 100% van de woningwaarde (2026).
- * Bij energiebesparende maatregelen mag dit oplopen tot 106%, waarbij het
- * meerdere uitsluitend aan die maatregelen mag worden besteed.
- * Bron: Tijdelijke regeling hypothecair krediet, art. 5.
- */
-export const LTV_BASIS = 1.0;
-export const LTV_VERDUURZAMING = 1.06;
-
-/**
- * NHG 2026. Bron: Nationale Hypotheek Garantie, voorwaarden & normen 2026.
- */
-export const NHG_KOSTENGRENS = 470000;
-export const NHG_KOSTENGRENS_VERDUURZAMING = 498200;
-export const NHG_PREMIE = 0.004; // 0,4% van de hypotheeksom
-
-/**
- * Kosten koper: standaard 5% van de koopsom (taxatie, notaris, advies,
- * overdrachtsbelasting). Instelbaar in de tool.
- */
-export const KOSTEN_KOPER_PERCENTAGE = 5; // procent
-/** Overdrachtsbelasting bestaande bouw, eigen bewoning. Kan jaarlijks wijzigen. */
-export const OVERDRACHTSBELASTING_PERCENTAGE = 2; // procent
-
-/** Gemiddeld tarief eerste schijf inkomstenbelasting voor renteaftrek-indicatie. */
-export const RENTEAFTREK_TARIEF = 0.3697;
-
-/** Standaard looptijd van een hypotheek in jaren. */
-export const STANDAARD_LOOPTIJD_JAREN = 30;
-
-/** Vakantiegeld: 8% van het bruto jaarsalaris. */
-export const VAKANTIEGELD_PERCENTAGE = 0.08;
+/** Kolomondergrenzen en volledige financieringslasttabel 2026 uit het Excel-model. */
+export const FINANCIERINGSLAST_RENTEKOLOMMEN = [0, 1.501, 2.001, 2.501, 3.001, 3.501, 4.001, 4.501, 5.001, 5.501, 6.001, 6.501] as const;
+export const FINANCIERINGSLAST_TABEL = [
+  { inkomenVanaf: 30000, percentages: [15.5, 16.5, 17.5, 18.4, 19.3, 20.1, 20.9, 21.6, 22.2, 22.7, 23.2, 23.7] },
+  { inkomenVanaf: 31000, percentages: [16.2, 17.3, 18.3, 19.3, 20.2, 21.2, 22, 22.7, 23.4, 24.1, 24.6, 25.1] },
+  { inkomenVanaf: 32000, percentages: [16.7, 17.9, 19, 20.1, 21.1, 22.1, 23, 23.8, 24.6, 25.3, 25.9, 26.4] },
+  { inkomenVanaf: 33000, percentages: [17.1, 18.3, 19.5, 20.6, 21.6, 22.6, 23.6, 24.6, 25.4, 26.1, 26.8, 27.4] },
+  { inkomenVanaf: 34000, percentages: [17.3, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 35000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 36000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 37000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 38000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 39000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 40000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 41000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 42000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 43000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 44000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 45000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 46000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 47000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 48000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 49000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 50000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 51000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 52000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 53000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 54000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 55000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 56000, percentages: [17.4, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 57000, percentages: [17.5, 18.5, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 58000, percentages: [17.6, 18.6, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 59000, percentages: [17.6, 18.6, 19.6, 20.6, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 60000, percentages: [17.7, 18.7, 19.7, 20.7, 21.6, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 61000, percentages: [17.7, 18.7, 19.7, 20.7, 21.7, 22.6, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 62000, percentages: [17.8, 18.8, 19.8, 20.7, 21.7, 22.7, 23.6, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 63000, percentages: [17.8, 18.9, 19.9, 20.9, 21.8, 22.7, 23.7, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 64000, percentages: [17.9, 18.9, 19.9, 21, 21.9, 22.8, 23.7, 24.6, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 65000, percentages: [18, 19, 20, 21, 22, 22.9, 23.8, 24.7, 25.5, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 66000, percentages: [18.1, 19.1, 20.1, 21.1, 22.1, 23, 23.9, 24.7, 25.6, 26.4, 27.3, 28.1] },
+  { inkomenVanaf: 67000, percentages: [18.2, 19.2, 20.2, 21.2, 22.2, 23.1, 24, 24.8, 25.7, 26.5, 27.3, 28.1] },
+  { inkomenVanaf: 68000, percentages: [18.3, 19.4, 20.4, 21.4, 22.3, 23.2, 24.1, 25, 25.8, 26.7, 27.4, 28.2] },
+  { inkomenVanaf: 69000, percentages: [18.5, 19.5, 20.5, 21.5, 22.5, 23.4, 24.3, 25.1, 26, 26.8, 27.6, 28.3] },
+  { inkomenVanaf: 70000, percentages: [18.6, 19.7, 20.7, 21.7, 22.7, 23.6, 24.5, 25.3, 26.2, 27, 27.8, 28.5] },
+  { inkomenVanaf: 71000, percentages: [18.8, 19.9, 20.9, 21.9, 22.9, 23.8, 24.7, 25.6, 26.4, 27.2, 28, 28.7] },
+  { inkomenVanaf: 72000, percentages: [19, 20, 21.1, 22.1, 23.1, 24.1, 25, 25.8, 26.6, 27.4, 28.2, 28.9] },
+  { inkomenVanaf: 73000, percentages: [19.1, 20.2, 21.3, 22.3, 23.3, 24.3, 25.2, 26, 26.9, 27.6, 28.4, 29.2] },
+  { inkomenVanaf: 74000, percentages: [19.3, 20.4, 21.5, 22.5, 23.5, 24.5, 25.4, 26.3, 27.1, 27.9, 28.6, 29.3] },
+  { inkomenVanaf: 75000, percentages: [19.4, 20.5, 21.6, 22.6, 23.7, 24.6, 25.6, 26.4, 27.3, 28.1, 28.8, 29.5] },
+  { inkomenVanaf: 76000, percentages: [19.5, 20.6, 21.7, 22.8, 23.8, 24.8, 25.7, 26.6, 27.5, 28.2, 29, 29.7] },
+  { inkomenVanaf: 77000, percentages: [19.6, 20.8, 21.9, 22.9, 24, 24.9, 25.9, 26.8, 27.6, 28.4, 29.2, 29.9] },
+  { inkomenVanaf: 78000, percentages: [19.7, 20.9, 22, 23.1, 24.1, 25.1, 26.1, 27, 27.8, 28.6, 29.4, 30.1] },
+  { inkomenVanaf: 79000, percentages: [19.8, 20.9, 22.1, 23.2, 24.2, 25.2, 26.2, 27.1, 27.9, 28.7, 29.5, 30.2] },
+  { inkomenVanaf: 80000, percentages: [19.9, 21, 22.2, 23.2, 24.3, 25.3, 26.3, 27.2, 28.1, 28.9, 29.6, 30.3] },
+  { inkomenVanaf: 81000, percentages: [20, 21.1, 22.2, 23.3, 24.3, 25.4, 26.4, 27.3, 28.1, 29, 29.7, 30.4] },
+  { inkomenVanaf: 82000, percentages: [20.1, 21.2, 22.3, 23.4, 24.4, 25.4, 26.4, 27.3, 28.2, 29, 29.8, 30.5] },
+  { inkomenVanaf: 83000, percentages: [20.1, 21.2, 22.3, 23.4, 24.4, 25.4, 26.4, 27.4, 28.2, 29.1, 29.9, 30.6] },
+  { inkomenVanaf: 84000, percentages: [20.2, 21.3, 22.4, 23.4, 24.5, 25.5, 26.5, 27.4, 28.3, 29.1, 29.9, 30.6] },
+  { inkomenVanaf: 85000, percentages: [20.2, 21.3, 22.4, 23.5, 24.5, 25.5, 26.5, 27.4, 28.3, 29.2, 29.9, 30.7] },
+  { inkomenVanaf: 86000, percentages: [20.2, 21.4, 22.5, 23.5, 24.6, 25.6, 26.5, 27.4, 28.4, 29.2, 30, 30.7] },
+  { inkomenVanaf: 87000, percentages: [20.3, 21.4, 22.5, 23.6, 24.6, 25.6, 26.6, 27.5, 28.4, 29.2, 30, 30.8] },
+  { inkomenVanaf: 88000, percentages: [20.4, 21.5, 22.5, 23.6, 24.6, 25.6, 26.6, 27.5, 28.4, 29.3, 30.1, 30.8] },
+  { inkomenVanaf: 89000, percentages: [20.5, 21.5, 22.6, 23.7, 24.7, 25.7, 26.6, 27.6, 28.4, 29.3, 30.1, 30.8] },
+  { inkomenVanaf: 90000, percentages: [20.5, 21.6, 22.6, 23.7, 24.7, 25.7, 26.7, 27.6, 28.5, 29.3, 30.1, 30.9] },
+  { inkomenVanaf: 91000, percentages: [20.5, 21.6, 22.7, 23.7, 24.8, 25.8, 26.7, 27.6, 28.5, 29.3, 30.2, 30.9] },
+  { inkomenVanaf: 92000, percentages: [20.6, 21.7, 22.7, 23.8, 24.8, 25.8, 26.8, 27.7, 28.6, 29.4, 30.2, 31] },
+  { inkomenVanaf: 93000, percentages: [20.7, 21.7, 22.8, 23.8, 24.8, 25.8, 26.8, 27.7, 28.6, 29.4, 30.2, 31] },
+  { inkomenVanaf: 94000, percentages: [20.8, 21.8, 22.8, 23.9, 24.9, 25.9, 26.9, 27.8, 28.6, 29.5, 30.2, 31] },
+  { inkomenVanaf: 95000, percentages: [20.8, 21.9, 22.9, 23.9, 25, 25.9, 26.9, 27.8, 28.7, 29.5, 30.3, 31] },
+  { inkomenVanaf: 96000, percentages: [20.9, 21.9, 23, 24, 25, 26, 26.9, 27.9, 28.7, 29.5, 30.3, 31] },
+  { inkomenVanaf: 97000, percentages: [21, 22, 23, 24, 25, 26, 27, 27.9, 28.8, 29.6, 30.4, 31.1] },
+  { inkomenVanaf: 98000, percentages: [21, 22.1, 23.1, 24.1, 25.1, 26.1, 27, 27.9, 28.8, 29.6, 30.4, 31.1] },
+  { inkomenVanaf: 99000, percentages: [21.1, 22.1, 23.2, 24.2, 25.1, 26.1, 27.1, 28, 28.8, 29.6, 30.4, 31.2] },
+  { inkomenVanaf: 100000, percentages: [21.1, 22.2, 23.2, 24.2, 25.2, 26.1, 27.1, 28, 28.9, 29.7, 30.5, 31.2] },
+  { inkomenVanaf: 101000, percentages: [21.2, 22.2, 23.3, 24.3, 25.3, 26.2, 27.1, 28, 28.9, 29.7, 30.5, 31.2] },
+  { inkomenVanaf: 102000, percentages: [21.2, 22.3, 23.4, 24.4, 25.3, 26.3, 27.1, 28.1, 28.9, 29.8, 30.5, 31.3] },
+  { inkomenVanaf: 103000, percentages: [21.3, 22.4, 23.4, 24.4, 25.4, 26.3, 27.2, 28.1, 29, 29.8, 30.6, 31.3] },
+  { inkomenVanaf: 104000, percentages: [21.3, 22.4, 23.5, 24.5, 25.5, 26.4, 27.3, 28.1, 29, 29.8, 30.6, 31.3] },
+  { inkomenVanaf: 105000, percentages: [21.3, 22.5, 23.5, 24.5, 25.5, 26.5, 27.3, 28.2, 29.1, 29.9, 30.6, 31.4] },
+  { inkomenVanaf: 106000, percentages: [21.4, 22.5, 23.6, 24.6, 25.6, 26.5, 27.4, 28.2, 29.1, 29.9, 30.7, 31.4] },
+  { inkomenVanaf: 107000, percentages: [21.4, 22.5, 23.7, 24.7, 25.6, 26.6, 27.5, 28.3, 29.1, 30, 30.7, 31.5] },
+  { inkomenVanaf: 108000, percentages: [21.5, 22.6, 23.7, 24.7, 25.7, 26.7, 27.5, 28.4, 29.2, 30, 30.8, 31.5] },
+  { inkomenVanaf: 109000, percentages: [21.5, 22.6, 23.7, 24.8, 25.8, 26.7, 27.6, 28.4, 29.2, 30, 30.8, 31.5] },
+  { inkomenVanaf: 110000, percentages: [21.6, 22.7, 23.7, 24.8, 25.8, 26.7, 27.7, 28.5, 29.3, 30, 30.8, 31.5] },
+  { inkomenVanaf: 111000, percentages: [21.6, 22.7, 23.8, 24.8, 25.9, 26.8, 27.7, 28.5, 29.3, 30.1, 30.8, 31.6] },
+  { inkomenVanaf: 112000, percentages: [21.7, 22.8, 23.8, 24.9, 25.9, 26.8, 27.7, 28.6, 29.4, 30.1, 30.9, 31.6] },
+  { inkomenVanaf: 113000, percentages: [21.7, 22.8, 23.9, 24.9, 25.9, 26.9, 27.8, 28.7, 29.4, 30.2, 30.9, 31.7] },
+  { inkomenVanaf: 114000, percentages: [21.8, 22.9, 23.9, 25, 25.9, 26.9, 27.8, 28.7, 29.5, 30.2, 30.9, 31.7] },
+  { inkomenVanaf: 115000, percentages: [21.8, 22.9, 24, 25, 26, 26.9, 27.9, 28.7, 29.5, 30.3, 31, 31.7] },
+  { inkomenVanaf: 116000, percentages: [21.8, 22.9, 24, 25, 26, 27, 27.9, 28.8, 29.6, 30.3, 31, 31.7] },
+  { inkomenVanaf: 117000, percentages: [21.9, 23, 24.1, 25.1, 26.1, 27, 28, 28.8, 29.6, 30.4, 31.1, 31.8] },
+  { inkomenVanaf: 118000, percentages: [21.9, 23, 24.1, 25.1, 26.1, 27.1, 28, 28.9, 29.7, 30.4, 31.1, 31.8] },
+  { inkomenVanaf: 119000, percentages: [22, 23.1, 24.1, 25.2, 26.2, 27.1, 28, 28.9, 29.7, 30.5, 31.2, 31.9] },
+  { inkomenVanaf: 120000, percentages: [22, 23.1, 24.2, 25.2, 26.2, 27.2, 28.1, 28.9, 29.8, 30.5, 31.3, 31.9] },
+  { inkomenVanaf: 121000, percentages: [22, 23.2, 24.2, 25.3, 26.3, 27.2, 28.1, 29, 29.8, 30.6, 31.3, 32] },
+  { inkomenVanaf: 122000, percentages: [22.1, 23.2, 24.3, 25.3, 26.3, 27.3, 28.2, 29, 29.9, 30.6, 31.4, 32] },
+  { inkomenVanaf: 123000, percentages: [22.1, 23.2, 24.3, 25.4, 26.4, 27.3, 28.2, 29.1, 29.9, 30.7, 31.4, 32.1] },
+  { inkomenVanaf: 124000, percentages: [22.2, 23.3, 24.4, 25.4, 26.4, 27.4, 28.3, 29.1, 29.9, 30.8, 31.5, 32.1] },
+  { inkomenVanaf: 125000, percentages: [22.2, 23.3, 24.4, 25.5, 26.5, 27.4, 28.3, 29.2, 30, 30.8, 31.5, 32.2] },
+] as const;
