@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Home, LineChart, Leaf, Compass } from "lucide-react";
+import { Home, LineChart } from "lucide-react";
 
 import dienstHypotheek from "@/assets/dienst-hypotheek.jpg";
 import dienstBeleggen from "@/assets/dienst-beleggen.jpg";
-import dienstVerduurzamen from "@/assets/dienst-verduurzamen.jpg";
-import dienstPlanning from "@/assets/dienst-planning.jpg";
 
 import { Reveal } from "@/components/site/motion";
 import { PillLink } from "@/components/site/PillButton";
@@ -16,13 +14,13 @@ export const Route = createFileRoute("/diensten")({
       {
         name: "description",
         content:
-          "Hypotheekadvies, beleggingsadvies, verduurzamingsadvies en financiële planning. Onafhankelijk advies zonder provisie.",
+          "Onafhankelijk hypotheekadvies en beleggingsadvies zonder provisie.",
       },
       { property: "og:title", content: "Diensten | BASE FINANCE" },
       {
         property: "og:description",
         content:
-          "Hypotheekadvies, beleggingsadvies, verduurzamen en financiële planning bij BASE FINANCE.",
+          "Hypotheekadvies en beleggingsadvies bij BASE FINANCE.",
       },
     ],
   }),
@@ -52,30 +50,6 @@ const diensten = [
       "Risicoprofiel en doelvermogen als vertrekpunt",
       "Duurzame indexfondsen met lage lopende kosten",
       "Halfjaarlijkse evaluatie en herbalancering",
-    ],
-  },
-  {
-    icon: Leaf,
-    title: "Verduurzamen & energie",
-    image: dienstVerduurzamen,
-    intro:
-      "Isolatie, warmtepomp of zonnepanelen financieren en subsidies benutten. We rekenen terugverdientijd en maandlast eerlijk voor je uit.",
-    points: [
-      "Subsidiecheck (ISDE en gemeentelijke regelingen)",
-      "Meefinancieren binnen je hypotheek",
-      "Berekening van energielabel en woningwaarde",
-    ],
-  },
-  {
-    icon: Compass,
-    title: "Financiële planning",
-    image: dienstPlanning,
-    intro:
-      "Een plan voor de lange termijn: pensioen, schenken, overlijden en arbeidsongeschiktheid, zodat je weet wat er gebeurt als het leven verandert.",
-    points: [
-      "Inzicht in inkomen nu, straks en onverwacht",
-      "Buffer-, schenk- en pensioenadvies",
-      "Jaarlijkse update van je plan",
     ],
   },
 ];

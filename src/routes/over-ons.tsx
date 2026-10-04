@@ -3,6 +3,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import overGesprek from "@/assets/over-gesprek.jpg";
 import overWoning from "@/assets/over-woning.jpg";
 import overLaptop from "@/assets/over-laptop.jpg";
+import daniloAsset from "@/assets/danilo-skoric.jpeg.asset.json";
+import huubAsset from "@/assets/huub-klein.jpeg.asset.json";
+import eliezerAsset from "@/assets/eliezer-reyes.jpeg.asset.json";
+import marrouaneAsset from "@/assets/marrouane-harraou.jpeg.asset.json";
+import charlotteAsset from "@/assets/charlotte-blanken.jpeg.asset.json";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillLink } from "@/components/site/PillButton";
@@ -46,7 +51,7 @@ function OverOns() {
                 provisie van geldverstrekkers, verzekeraars of fondshuizen.
               </p>
               <p>
-                Ons team van acht adviseurs en planners begeleidt starters, doorstromers
+                Ons team van vijf adviseurs begeleidt starters, doorstromers
                 en ondernemers. Duurzaamheid is geen extraatje maar een vast onderdeel
                 van elk advies: van energielabel en verduurzamingsbudget tot de
                 fondsselectie in je portefeuille.
@@ -80,13 +85,15 @@ function OverOns() {
       <section className="section-y bg-background">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <Reveal><p className="label-eyebrow">Ons team</p><h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium">Persoonlijk advies begint bij mensen</h2></Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {[
-              { src: overGesprek, naam: "Eva de Boer", functie: "Hypotheekadviseur" },
-              { src: overWoning, naam: "Thomas van Dijk", functie: "Financieel planner" },
-              { src: overLaptop, naam: "Noor Bakker", functie: "Beleggingsadviseur" },
+              { src: daniloAsset.url, naam: "Danilo Skoric", functie: "Adviseur" },
+              { src: huubAsset.url, naam: "Huub Klein", functie: "Adviseur" },
+              { src: eliezerAsset.url, naam: "Eliezer Reyes", functie: "Adviseur" },
+              { src: marrouaneAsset.url, naam: "Marrouane Harraou", functie: "Adviseur" },
+              { src: charlotteAsset.url, naam: "Charlotte Blanken", functie: "Adviseur" },
             ].map((persoon, i) => (
-              <Reveal key={persoon.naam} delay={i * 0.1}><article><img src={persoon.src} alt={`${persoon.naam}, ${persoon.functie}`} width={1024} height={1280} loading="lazy" className="h-[380px] w-full rounded-xl object-cover" /><h3 className="mt-5 text-xl font-medium">{persoon.naam}</h3><p className="mt-1 text-sm text-muted-foreground">{persoon.functie}</p></article></Reveal>
+              <Reveal key={persoon.naam} delay={i * 0.08}><article><img src={persoon.src} alt={`${persoon.naam}, ${persoon.functie} bij BASE FINANCE`} width={1024} height={768} loading="lazy" className="aspect-[4/5] w-full rounded-xl object-cover" /><h3 className="mt-5 text-xl font-medium">{persoon.naam}</h3><p className="mt-1 text-sm text-muted-foreground">{persoon.functie}</p></article></Reveal>
             ))}
           </div>
         </div>
@@ -132,7 +139,7 @@ function OverOns() {
         <div className="mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-3">
           {[
             { value: 2008, label: "Opgericht in Rotterdam", plain: true },
-            { value: 8, label: "Adviseurs en planners" },
+            { value: 5, label: "Adviseurs" },
             { value: 96, suffix: "%", label: "Klanten beveelt ons aan" },
           ].map((s, i) => (
             <Reveal key={s.label} delay={i * 0.12}>

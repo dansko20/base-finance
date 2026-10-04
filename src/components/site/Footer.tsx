@@ -58,8 +58,6 @@ export function Footer() {
             <ul className="mt-6 space-y-4 text-muted-foreground">
               <li><Link to="/hypotheekadvies" className="transition-colors hover:text-foreground">Hypotheekadvies</Link></li>
               <li><Link to="/beleggingsadvies" className="transition-colors hover:text-foreground">Beleggingsadvies</Link></li>
-              <li>Verduurzamen &amp; energie</li>
-              <li>Financiële planning</li>
             </ul>
           </div>
         </div>

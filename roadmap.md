@@ -7,6 +7,6 @@
 - [x] Vervang de donkerblauwe accenten door #CBFF74 en plaats het nieuwe logo in de uitklapbare header
 - [ ] Controleer navigatie, animaties en weergave op desktop en mobiel
 - [ ] Test de hypotheekberekening met meerdere voorbeelden
-- [ ] Vervang de hypotheektool door de korte bezoekersversie uit het aangeleverde Excel-bestand
-- [ ] Voeg Danilo, Huub, Eliezer, Marrouane en Charlotte toe aan Onze adviseurs
-- [ ] Beperk alle diensten en formulierkeuzes tot hypotheekadvies en beleggingsadvies
+- [x] Vervang de hypotheektool door de korte bezoekersversie uit het aangeleverde Excel-bestand
+- [x] Voeg Danilo, Huub, Eliezer, Marrouane en Charlotte toe aan Onze adviseurs
+- [x] Beperk alle diensten en formulierkeuzes tot hypotheekadvies en beleggingsadvies

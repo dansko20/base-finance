@@ -1,193 +1,48 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
-import { gsap } from "gsap";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
+import { ArrowUpRight, Calculator, CalendarDays, ChartNoAxesCombined, CheckSquare, ChevronDown, Home, Menu, Phone, Users, X } from "lucide-react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
 import type { AppPath } from "./PillButton";
 
-type NavLink = { label: string; to: AppPath; ariaLabel: string };
-type CardNavItem = { label: string; className: string; links: NavLink[] };
-
-const items: CardNavItem[] = [
-  {
-    label: "Advies",
-    className: "bg-primary text-primary-foreground",
-    links: [
-      { label: "Hypotheekadvies", to: "/hypotheekadvies", ariaLabel: "Bekijk hypotheekadvies" },
-      { label: "Beleggingsadvies", to: "/beleggingsadvies", ariaLabel: "Bekijk beleggingsadvies" },
-      { label: "Rekentools", to: "/rekentools", ariaLabel: "Bekijk rekentools" },
-    ],
-  },
-  {
-    label: "BASE FINANCE",
-    className: "bg-foreground text-background",
-    links: [
-      { label: "Over ons", to: "/over-ons", ariaLabel: "Lees over BASE FINANCE" },
-      { label: "Onze werkwijze", to: "/werkwijze", ariaLabel: "Bekijk onze werkwijze" },
-    ],
-  },
-  {
-    label: "Kennismaken",
-    className: "bg-accent text-accent-foreground",
-    links: [
-      { label: "Plan een gesprek", to: "/plan-een-gesprek", ariaLabel: "Plan een gesprek" },
-      { label: "Contactgegevens", to: "/contactgegevens", ariaLabel: "Bekijk contactgegevens" },
-    ],
-  },
-];
-
+type Entry = { label: string; description: string; to: AppPath; icon: ComponentType<{ className?: string }> };
+type MenuName = "advies" | "over" | "kennis";
+const groups: Record<MenuName, { label: string; entries: Entry[] }> = {
+  advies: { label: "Advies", entries: [
+    { label: "Hypotheekadvies", description: "Hulp bij het kiezen van een hypotheek die bij je past.", to: "/hypotheekadvies", icon: Home },
+    { label: "Beleggingsadvies", description: "Een duidelijk plan voor je vermogen op lange termijn.", to: "/beleggingsadvies", icon: ChartNoAxesCombined },
+    { label: "Rekentools", description: "Reken zelf uit wat je ongeveer kunt lenen.", to: "/rekentools", icon: Calculator },
+  ] },
+  over: { label: "Over BASE", entries: [
+    { label: "Over ons", description: "Wie we zijn en waarom we dit doen.", to: "/over-ons", icon: Users },
+    { label: "Onze werkwijze", description: "Stap voor stap hoe een adviestraject verloopt.", to: "/werkwijze", icon: CheckSquare },
+  ] },
+  kennis: { label: "Kennismaken", entries: [
+    { label: "Plan een gesprek", description: "Kies een moment voor een vrijblijvende kennismaking.", to: "/plan-een-gesprek", icon: CalendarDays },
+    { label: "Contactgegevens", description: "Bel, mail of bezoek ons kantoor.", to: "/contactgegevens", icon: Phone },
+  ] },
+};
+function EntryLink({ entry, close }: { entry: Entry; close: () => void }) {
+  const Icon = entry.icon;
+  return <Link to={entry.to} onClick={close} className="group flex gap-3 rounded-xl p-3 transition-colors hover:bg-accent"><span className="grid size-10 shrink-0 place-items-center rounded-lg bg-accent text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-[18px]" /></span><span><span className="flex items-center gap-1.5 text-sm font-semibold">{entry.label}<ArrowUpRight className="size-3.5 text-primary opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" /></span><span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{entry.description}</span></span></Link>;
+}
 export function CardNav({ className }: { className?: string }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [expanded, setExpanded] = useState(false);
-  const navRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
-
-  useEffect(() => {
-    setExpanded(false);
-    gsap.set(navRef.current, { height: 60 });
-  }, [pathname]);
-
-  const calculateHeight = () => {
-    if (typeof window === "undefined") return 260;
-    return window.matchMedia("(max-width: 768px)").matches ? 390 : 260;
-  };
-
-  useLayoutEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(nav, { height: 60, overflow: "hidden" });
-      gsap.set(cardsRef.current, { y: 45, opacity: 0 });
-      timelineRef.current = gsap
-        .timeline({ paused: true })
-        .to(nav, { height: calculateHeight, duration: 0.42, ease: "power3.out" })
-        .to(
-          cardsRef.current,
-          { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.08 },
-          "-=0.16",
-        );
-    }, nav);
-
-    const resize = () => {
-      if (expanded) gsap.set(nav, { height: calculateHeight() });
-    };
-    window.addEventListener("resize", resize);
-    return () => {
-      window.removeEventListener("resize", resize);
-      timelineRef.current?.kill();
-      ctx.revert();
-    };
-  }, [expanded]);
-
-  useLayoutEffect(() => {
-    if (!expanded) return;
-    timelineRef.current?.progress(0).play();
-  }, [expanded]);
-
-  const toggle = () => {
-    if (!expanded) {
-      setExpanded(true);
-      return;
-    }
-    timelineRef.current?.eventCallback("onReverseComplete", () => setExpanded(false));
-    timelineRef.current?.reverse();
-  };
-
-  const overlay = pathname === "/";
-
-  return (
-    <div
-      className={cn(
-        "fixed left-1/2 top-5 z-50 w-[calc(100%-2rem)] max-w-[860px] -translate-x-1/2 md:top-7",
-        className,
-      )}
-    >
-      <div
-        ref={navRef}
-        className="relative rounded-xl border border-primary bg-background shadow-header"
-      >
-        <div className="absolute inset-x-0 top-0 z-10 grid h-[60px] grid-cols-[1fr_auto_1fr] items-center rounded-xl bg-primary px-3 sm:px-4">
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label={expanded ? "Menu sluiten" : "Menu openen"}
-            aria-expanded={expanded}
-            className="group justify-self-start p-2"
-          >
-            <span className="sr-only">Menu</span>
-            <span className="flex w-7 flex-col gap-1.5">
-              <span
-                className={cn(
-                  "h-px w-full bg-foreground transition-transform duration-300",
-                  expanded && "translate-y-[3.5px] rotate-45",
-                )}
-              />
-              <span
-                className={cn(
-                  "h-px w-full bg-foreground transition-transform duration-300",
-                  expanded && "-translate-y-[3.5px] -rotate-45",
-                )}
-              />
-            </span>
-          </button>
-
-          <Link to="/" aria-label="BASE FINANCE home" onClick={() => setExpanded(false)}>
-            <Logo />
-          </Link>
-
-          <Link
-            to="/plan-een-gesprek"
-            onClick={() => setExpanded(false)}
-            className="justify-self-end rounded-lg bg-foreground px-4 py-2.5 text-sm font-medium text-background transition-all duration-300 hover:opacity-85 hover:shadow-soft"
-          >
-            <span className="hidden sm:inline">Plan een gesprek</span>
-            <span className="sm:hidden">Contact</span>
-          </Link>
-        </div>
-
-        <div
-          className={cn(
-            "absolute inset-x-0 bottom-0 top-[60px] grid gap-2 p-2 md:grid-cols-3",
-            expanded ? "visible pointer-events-auto" : "invisible pointer-events-none",
-          )}
-        >
-          {items.map((item, index) => (
-            <div
-              key={item.label}
-              ref={(element) => {
-                cardsRef.current[index] = element;
-              }}
-              className={cn(
-                "flex min-h-[96px] flex-col rounded-lg p-4 md:min-h-0",
-                item.className,
-              )}
-            >
-              <p className="text-xl font-medium">{item.label}</p>
-              <div className="mt-auto flex flex-col gap-1 pt-3">
-                {item.links.map((link) => (
-                  <Link
-                    key={link.label}
-                    to={link.to}
-                    aria-label={link.ariaLabel}
-                    onClick={() => setExpanded(false)}
-                    className="group/link inline-flex items-center gap-1.5 text-sm transition-opacity hover:opacity-70"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {overlay && !expanded ? (
-        <span className="sr-only">Navigatie over de homepage-afbeelding</span>
-      ) : null}
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const [active, setActive] = useState<MenuName | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const close = () => { setActive(null); setMobileOpen(false); };
+  useEffect(close, [pathname]);
+  useEffect(() => { const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") close(); }; document.addEventListener("keydown", onKey); return () => document.removeEventListener("keydown", onKey); }, []);
+  return <header className={cn("fixed inset-x-4 top-4 z-50 mx-auto max-w-[1400px] rounded-[20px] bg-background shadow-header", className)}>
+    <div className="flex h-[72px] items-center justify-between gap-4 px-3 sm:px-5">
+      <div className="flex items-center gap-2"><button type="button" aria-label={mobileOpen ? "Menu sluiten" : "Menu openen"} aria-expanded={mobileOpen} onClick={() => setMobileOpen((value) => !value)} className="grid size-11 place-items-center rounded-xl text-primary hover:bg-accent lg:hidden">{mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}</button><Link to="/" aria-label="BASE FINANCE home" className="flex items-center gap-2.5"><Logo /><span className="hidden text-[17px] font-bold text-primary sm:inline">BASE FINANCE</span></Link></div>
+      <nav aria-label="Hoofdmenu" onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current); }} onMouseLeave={() => { closeTimer.current = setTimeout(() => setActive(null), 220); }} className="relative hidden lg:block">
+        <div className="flex gap-1">{(Object.keys(groups) as MenuName[]).map((name) => <button key={name} type="button" aria-expanded={active === name} onMouseEnter={() => setActive(name)} onClick={() => setActive(active === name ? null : name)} className={cn("flex h-11 items-center gap-1.5 rounded-xl px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-primary", active === name && "bg-accent text-primary")}>{groups[name].label}<ChevronDown className={cn("size-3.5 transition-transform", active === name && "rotate-180")} /></button>)}</div>
+        <div className={cn("absolute left-1/2 top-[58px] w-[590px] -translate-x-1/2 rounded-[18px] border border-border bg-background p-3 shadow-header transition-all duration-300", active ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0")}>{active ? <div className={cn("grid gap-2", active !== "kennis" && "grid-cols-[1fr_210px]")}><div className="space-y-1">{groups[active].entries.map((entry) => <EntryLink key={entry.to} entry={entry} close={close} />)}</div>{active !== "kennis" ? <Link to={active === "advies" ? "/plan-een-gesprek" : "/over-ons"} onClick={close} className="flex min-h-52 flex-col justify-end rounded-[14px] bg-primary p-5 text-primary-foreground transition-transform hover:-translate-y-0.5"><Logo className="mb-auto opacity-30" /><h3 className="font-semibold">{active === "advies" ? "Gratis kennismaking" : "BASE FINANCE"}</h3><p className="mt-2 text-xs text-primary-foreground/70">{active === "advies" ? "Samen kijken we welk advies bij je past." : "Financieel advies dat helder en eerlijk is."}</p><span className="mt-4 flex items-center gap-1 text-sm font-semibold">Meer bekijken <ArrowUpRight className="size-4" /></span></Link> : null}</div> : null}</div>
+      </nav>
+      <Link to="/plan-een-gesprek" className="flex h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"><span className="hidden sm:inline">Plan een gesprek</span><span className="sm:hidden">Gesprek</span><ArrowUpRight className="size-4" /></Link>
     </div>
-  );
+    <div className={cn("grid transition-[grid-template-rows] duration-500 lg:hidden", mobileOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}><div className="overflow-hidden"><div className="grid gap-2 p-2 pt-0 sm:grid-cols-3">{(Object.keys(groups) as MenuName[]).map((name, index) => <section key={name} className={cn("flex min-h-44 flex-col rounded-2xl p-5", index === 1 ? "bg-primary text-primary-foreground" : "border border-border bg-accent text-primary")}><h2 className="text-xl font-semibold">{name === "over" ? "BASE FINANCE" : groups[name].label}</h2><div className="mt-auto space-y-2 pt-5">{groups[name].entries.map((entry) => <Link key={entry.to} to={entry.to} onClick={close} className="flex items-center gap-1.5 text-sm font-medium">{entry.label}<ArrowUpRight className="size-3.5" /></Link>)}</div></section>)}</div></div></div>
+  </header>;
 }
