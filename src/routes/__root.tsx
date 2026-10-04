@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "BASE FINANCE geeft onafhankelijk en duurzaam advies over hypotheken, beleggen, verduurzamen en financiële planning.",
+          "BASE FINANCE geeft onafhankelijk en duurzaam hypotheekadvies en beleggingsadvies.",
       },
       { name: "author", content: "BASE FINANCE" },
       { property: "og:type", content: "website" },
