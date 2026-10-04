@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { Home, LineChart, Leaf, Compass } from "lucide-react";
+import { Home, LineChart } from "lucide-react";
 
 import heroImg from "@/assets/hero-advies.jpg";
 import overGesprek from "@/assets/over-gesprek.jpg";
@@ -9,8 +9,6 @@ import overWoning from "@/assets/over-woning.jpg";
 import overLaptop from "@/assets/over-laptop.jpg";
 import dienstHypotheek from "@/assets/dienst-hypotheek.jpg";
 import dienstBeleggen from "@/assets/dienst-beleggen.jpg";
-import dienstVerduurzamen from "@/assets/dienst-verduurzamen.jpg";
-import dienstPlanning from "@/assets/dienst-planning.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillLink } from "@/components/site/PillButton";
@@ -50,18 +48,6 @@ const diensten = [
     title: "Beleggingsadvies",
     image: dienstBeleggen,
     text: "Een portefeuille met duidelijke risico's, lage kosten en een duurzame invulling die je begrijpt.",
-  },
-  {
-    icon: Leaf,
-    title: "Verduurzamen",
-    image: dienstVerduurzamen,
-    text: "Isolatie, warmtepomp of zonnepanelen slim meefinancieren, inclusief subsidies en groene rentekorting.",
-  },
-  {
-    icon: Compass,
-    title: "Financiële planning",
-    image: dienstPlanning,
-    text: "Overzicht voor later: pensioen, schenken, arbeidsongeschiktheid en de buffer die je echt nodig hebt.",
   },
 ];
 
@@ -190,7 +176,7 @@ function Home_() {
             <Reveal>
               <p className="label-eyebrow">Onze diensten</p>
               <h2 className="mt-8 max-w-md text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">
-                Vier expertises,
+                Twee expertises,
                 <br />
                 één financieel plan
               </h2>
@@ -203,7 +189,7 @@ function Home_() {
             </Reveal>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {diensten.map((d, i) => (
               <Reveal key={d.title} delay={i * 0.12}>
                 <article className="group h-full overflow-hidden rounded-xl bg-background transition-shadow duration-500 hover:shadow-soft">
