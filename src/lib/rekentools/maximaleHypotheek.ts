@@ -138,7 +138,7 @@ export function berekenMaximaleHypotheek(input: MaximaleHypotheekInput): Maximal
 }
 
 export const DEFAULT_INPUT: MaximaleHypotheekInput = {
-  aanvrager1: { brutoMaandsalaris: 3500, dertiendeMaand: false, anderVastInkomen: 0 },
+  aanvrager1: { brutoMaandsalaris: 0, dertiendeMaand: false, anderVastInkomen: 0 },
   aanvrager2: { brutoMaandsalaris: 0, dertiendeMaand: false, anderVastInkomen: 0 },
   roodstandLimiet: 0,
   andereLeningen: 0,
