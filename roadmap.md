@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Voeg de aangeleverde adviseursteksten met vergelijkbare lengte toe, met afwisselend links/rechts geplaatste portretten, en controleer de weergave.
+- [x] Voeg de aangeleverde adviseursteksten met vergelijkbare lengte toe, met afwisselend links/rechts geplaatste portretten, en controleer de weergave.
 
 - [x] Rond de BASE FINANCE-pagina’s af en los huidige typefouten op
 - [x] Integreer CardNav met GSAP in de oorspronkelijke stijl
