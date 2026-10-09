@@ -3,11 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import overGesprek from "@/assets/over-gesprek.jpg";
 import overWoning from "@/assets/over-woning.jpg";
 import overLaptop from "@/assets/over-laptop.jpg";
-import daniloAsset from "@/assets/danilo-skoric.jpeg.asset.json";
-import huubAsset from "@/assets/huub-klein.jpeg.asset.json";
-import eliezerAsset from "@/assets/eliezer-reyes.jpeg.asset.json";
-import marrouaneAsset from "@/assets/marrouane-harraou.jpeg.asset.json";
-import charlotteAsset from "@/assets/charlotte-blanken.jpeg.asset.json";
+import { AdvisorTeam } from "@/components/site/AdvisorTeam";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillLink } from "@/components/site/PillButton";
@@ -22,6 +18,8 @@ export const Route = createFileRoute("/over-ons")({
           "BASE FINANCE is een onafhankelijk financieel adviesbureau in Rotterdam met duurzaam hypotheek- en beleggingsadvies.",
       },
       { property: "og:title", content: "Over BASE FINANCE" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:description",
         content:
@@ -82,22 +80,7 @@ function OverOns() {
         </div>
       </section>
 
-      <section className="section-y bg-background">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-          <Reveal><p className="label-eyebrow">Ons team</p><h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium">Persoonlijk advies begint bij mensen</h2></Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {[
-              { src: daniloAsset.url, naam: "Danilo Skoric", functie: "Adviseur" },
-              { src: huubAsset.url, naam: "Huub Klein", functie: "Adviseur" },
-              { src: eliezerAsset.url, naam: "Eliezer Reyes", functie: "Adviseur" },
-              { src: marrouaneAsset.url, naam: "Marrouane Harraou", functie: "Adviseur" },
-              { src: charlotteAsset.url, naam: "Charlotte Blanken", functie: "Adviseur" },
-            ].map((persoon, i) => (
-              <Reveal key={persoon.naam} delay={i * 0.08}><article><img src={persoon.src} alt={`${persoon.naam}, ${persoon.functie} bij BASE FINANCE`} width={1024} height={768} loading="lazy" className="aspect-[4/5] w-full rounded-xl object-cover" /><h3 className="mt-5 text-xl font-medium">{persoon.naam}</h3><p className="mt-1 text-sm text-muted-foreground">{persoon.functie}</p></article></Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AdvisorTeam />
 
       <section className="section-y bg-surface">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">

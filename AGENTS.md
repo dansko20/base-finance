@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep annual mortgage standards in a year-specific config module and calculation logic separate from React presentation, so yearly updates never require redesigning the tool.
+- Keep advisor profiles and their presentation in the dedicated AdvisorTeam component so team updates stay independent of the rest of the About page.
