@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import dienstHypotheek from "@/assets/dienst-hypotheek.jpg";
+import dienstHypotheek from "@/assets/starter-huissleutels.jpg";
 import { Faq } from "@/components/site/Faq";
 import { PillLink } from "@/components/site/PillButton";
 import { Reveal } from "@/components/site/motion";
@@ -8,8 +8,10 @@ import { Reveal } from "@/components/site/motion";
 export const Route = createFileRoute("/hypotheekadvies")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Hypotheekadvies | BASE FINANCE" },
-      { name: "description", content: "Onafhankelijk hypotheekadvies voor starters, doorstromers en oversluiters." },
+      { name: "description", content: "Hypotheekadvies voor je eerste huis: inzicht in wat je kunt lenen, je eigen geld en je maandlast met één vaste adviseur." },
       { property: "og:title", content: "Hypotheekadvies | BASE FINANCE" },
       { property: "og:description", content: "Persoonlijk hypotheekadvies met een heldere vergelijking en begeleiding tot de notaris." },
     ],
@@ -18,9 +20,9 @@ export const Route = createFileRoute("/hypotheekadvies")({
 });
 
 const doelgroepen = [
-  { title: "Starters", text: "We brengen je leenruimte, maandlasten en benodigde eigen geld in kaart en begeleiden je bij je eerste bod." },
-  { title: "Doorstromers", text: "We rekenen verkoop, overwaarde, overbruggingskrediet en de financiering van je volgende woning als één geheel door." },
-  { title: "Oversluiters", text: "We vergelijken rentevoordeel, boeterente en kosten, zodat je weet of oversluiten echt voordeel oplevert." },
+  { title: "Wat kun je lenen?", text: "Met je inkomen en vaste uitgaven berekenen we wat je kunt lenen. Zo weet je in welke prijsklasse je kunt zoeken." },
+  { title: "Wat heb je zelf nodig?", text: "Naast je hypotheek heb je spaargeld nodig voor bijvoorbeeld de notaris en de aankoopkosten. We zetten die bedragen voor je op een rij." },
+  { title: "Wat betaal je per maand?", text: "We kijken niet alleen naar het maximale bedrag, maar vooral naar een maandlast waarbij je prettig kunt blijven leven." },
 ];
 
 const faq = [
@@ -57,13 +59,13 @@ function Hypotheekadvies() {
 
       <section className="section-y bg-background">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 sm:px-8 lg:grid-cols-2">
-          <Reveal><img src={dienstHypotheek} alt="Persoonlijk hypotheekadvies" width={1024} height={1024} className="h-full min-h-[380px] w-full rounded-xl object-cover" /></Reveal>
+          <Reveal><img src={dienstHypotheek} alt="Jonge vrouw met de sleutels van haar eerste huis" loading="lazy" width={1024} height={1280} className="h-full min-h-[380px] w-full rounded-xl object-cover" /></Reveal>
           <Reveal delay={0.12}>
             <p className="label-eyebrow">Het adviestraject</p>
             <h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">Van eerste berekening tot sleuteloverdracht</h2>
             <div className="mt-8 space-y-5 text-muted-foreground">
-              <p>We beginnen met je wensen, inkomen, verplichtingen en toekomstplannen. Daarna vergelijken we passende hypotheken en rekenen we meerdere scenario’s door.</p>
-              <p>Je ontvangt een begrijpelijk advies met de maandlasten, risico’s en voorwaarden. Na je keuze verzorgen we de aanvraag en houden we contact met geldverstrekker, taxateur en notaris.</p>
+              <p>Je vaste adviseur kent je plannen al. Samen kijken we naar je inkomen, spaargeld, leningen en woonwens. Daarna vergelijken we hypotheken op rente, voorwaarden en wat je elke maand betaalt.</p>
+              <p>Je krijgt duidelijke uitleg over de kosten en risico’s. We bespreken ook of energiezuinige keuzes passen bij je budget. Na je keuze regelen we de aanvraag en houden we contact met de bank, de woningtaxateur en de notaris.</p>
             </div>
             <div className="mt-9"><PillLink to="/plan-een-gesprek">Plan een gesprek</PillLink></div>
           </Reveal>

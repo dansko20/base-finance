@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import overGesprek from "@/assets/over-gesprek.jpg";
-import overWoning from "@/assets/over-woning.jpg";
-import overLaptop from "@/assets/over-laptop.jpg";
+import overGesprek from "@/assets/starters-adviesgesprek.jpg";
+import overWoning from "@/assets/starter-huissleutels.jpg";
+import overLaptop from "@/assets/starter-financien.jpg";
 import { AdvisorTeam } from "@/components/site/AdvisorTeam";
 
 import { Reveal, CountUp } from "@/components/site/motion";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/over-ons")({
       {
         name: "description",
         content:
-          "BASE FINANCE is een onafhankelijk financieel adviesbureau in Rotterdam met duurzaam hypotheek- en beleggingsadvies.",
+          "BASE FINANCE is het Base Camp voor starters van 21 tot 35 jaar: één vaste adviseur voor beleggen en je eerste hypotheek.",
       },
       { property: "og:title", content: "Over BASE FINANCE" },
       { property: "og:type", content: "website" },
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/over-ons")({
       {
         property: "og:description",
         content:
-          "Onafhankelijk financieel adviesbureau in Rotterdam, gespecialiseerd in duurzaam hypotheek- en beleggingsadvies.",
+          "Maak kennis met je Base Camp: één vaste adviseur, een helder plan en duurzame keuzes die bij jouw situatie passen.",
       },
     ],
   }),
@@ -38,21 +38,20 @@ function OverOns() {
           <Reveal>
             <p className="label-eyebrow">Over ons</p>
             <h1 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
-              Onafhankelijk sinds dag één
+              Jouw Base Camp
             </h1>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="max-w-xl space-y-6 text-muted-foreground lg:pt-24">
               <p>
-                BASE FINANCE is in 2008 opgericht in Rotterdam met één uitgangspunt:
-                advies moet vrij zijn van commerciële belangen. We ontvangen daarom geen
-                provisie van geldverstrekkers, verzekeraars of fondshuizen.
+                BASE FINANCE is je basiskamp voor elke financiële stap. We helpen starters van 21 tot 35 jaar: je hebt je eerste vaste baan, huurt of woont nog thuis en denkt aan een eigen huis. Bij ons krijg je één vaste adviseur voor beleggen én je hypotheek.
               </p>
               <p>
-                Ons team van vijf adviseurs begeleidt starters, doorstromers
-                en ondernemers. Duurzaamheid is geen extraatje maar een vast onderdeel
-                van elk advies: van energielabel en verduurzamingsbudget tot de
-                fondsselectie in je portefeuille.
+                Wij geven je één vaste adviseur en een helder plan, zodat je precies weet wanneer je je eigen huis kunt kopen. Eerlijk, zonder kleine lettertjes.
+              </p>
+              <p>We werken met een concrete streefdatum op basis van je situatie en duidelijke aannames. Dat is geen garantie: je inkomen, woningprijzen en rente kunnen veranderen. Samen houden we je plan actueel.
+              </p>
+              <p>Duurzaamheid nemen we mee in elk advies, maar jouw situatie staat altijd voorop. Zo bouw je aan rust en grip op je toekomst.
               </p>
             </div>
           </Reveal>
@@ -62,9 +61,9 @@ function OverOns() {
       <section className="pb-8">
         <div className="mx-auto grid max-w-[1400px] gap-5 px-5 sm:grid-cols-3 sm:px-8">
           {[
-            { src: overGesprek, alt: "Adviesgesprek bij BASE FINANCE" },
-            { src: overWoning, alt: "Verduurzaamde woning" },
-            { src: overLaptop, alt: "Rendementsoverzicht op laptop" },
+            { src: overGesprek, alt: "Ontspannen gesprek tussen een starter en een jonge adviseur" },
+            { src: overWoning, alt: "Starter met de sleutels van haar eerste huis" },
+            { src: overLaptop, alt: "Jongvolwassene bekijkt haar financiën aan de keukentafel" },
           ].map((img, i) => (
             <Reveal key={img.alt} delay={i * 0.12}>
               <img
@@ -100,11 +99,11 @@ function OverOns() {
               },
               {
                 title: "Duurzaam als standaard",
-                text: "Bij elk traject rekenen we uit wat verduurzaming oplevert voor je maandlast, comfort en woningwaarde.",
+                text: "We bespreken duurzame mogelijkheden bij beleggen en je woning. Jij kiest wat past bij je wensen en wat je kunt betalen.",
               },
               {
                 title: "Begrijpelijke taal",
-                text: "Geen jargon en geen kleine lettertjes: je krijgt een rapport dat je aan je keukentafel kunt uitleggen.",
+                text: "Eerlijke uitleg over kosten, kansen en risico’s. Je krijgt een helder plan dat je begrijpt, zonder kleine lettertjes.",
               },
             ].map((v, i) => (
               <Reveal key={v.title} delay={i * 0.12}>

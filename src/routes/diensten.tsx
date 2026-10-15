@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Home, LineChart } from "lucide-react";
 
-import dienstHypotheek from "@/assets/dienst-hypotheek.jpg";
-import dienstBeleggen from "@/assets/dienst-beleggen.jpg";
+import dienstHypotheek from "@/assets/starter-huissleutels.jpg";
+import dienstBeleggen from "@/assets/starter-financien.jpg";
 
 import { Reveal } from "@/components/site/motion";
 import { PillLink } from "@/components/site/PillButton";
@@ -10,6 +10,8 @@ import { PillLink } from "@/components/site/PillButton";
 export const Route = createFileRoute("/diensten")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Diensten — Hypotheek en beleggen | BASE FINANCE" },
       {
         name: "description",
@@ -33,10 +35,10 @@ const diensten = [
     title: "Hypotheekadvies",
     image: dienstHypotheek,
     intro:
-      "Je eerste woning, doorstromen of oversluiten. Wij vergelijken alle geldverstrekkers en rekenen scenario's door tot je zeker weet dat de maandlast comfortabel blijft.",
+      "Je eerste huis kopen begint met overzicht. Je vaste adviseur bekijkt wat je kunt lenen, hoeveel spaargeld je nodig hebt en welke maandlast bij je past.",
     points: [
-      "Volledige marktvergelijking, geen vaste partners",
-      "Groene rentekorting en energiebespaarbudget",
+      "Vergelijking van rente en voorwaarden",
+      "Energiezuinige keuzes die bij je budget passen",
       "Begeleiding tot en met de notaris",
     ],
   },
@@ -45,11 +47,11 @@ const diensten = [
     title: "Beleggingsadvies",
     image: dienstBeleggen,
     intro:
-      "Vermogen laten groeien met een portefeuille die past bij je horizon en je risicobereidheid, met lage kosten en heldere rapportage.",
+      "Samen kijken we of beleggen past bij je koopwens en de tijd die je hebt. Je houdt geld achter de hand en begrijpt wat je kunt verliezen en wat het kost.",
     points: [
-      "Risicoprofiel en doelvermogen als vertrekpunt",
-      "Duurzame indexfondsen met lage lopende kosten",
-      "Halfjaarlijkse evaluatie en herbalancering",
+      "Je doel en het risico dat je kunt dragen als vertrekpunt",
+      "Duidelijke uitleg over beleggingen en duurzame keuzes",
+      "Regelmatig bespreken of je plan nog bij je past",
     ],
   },
 ];
@@ -82,7 +84,7 @@ function Diensten() {
                   alt={d.title}
                   loading="lazy"
                   width={1024}
-                  height={1024}
+                  height={1280}
                   className="h-72 w-full rounded-lg object-cover lg:h-full"
                 />
                 <div className="lg:py-4">

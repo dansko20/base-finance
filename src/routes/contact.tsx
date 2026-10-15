@@ -8,6 +8,8 @@ import { PillButton } from "@/components/site/PillButton";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Contact | BASE FINANCE" },
       {
         name: "description",
@@ -128,9 +130,6 @@ function Contact() {
                   >
                     <option>Hypotheekadvies</option>
                     <option>Beleggingsadvies</option>
-                    <option>Verduurzamen</option>
-                    <option>Financiële planning</option>
-                    <option>Anders</option>
                   </select>
                 </div>
                 <div>
