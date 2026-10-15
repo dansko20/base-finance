@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Verbeter teksten voor starters, verdeel toekomstplan en Base Camp over bestaande pagina’s en behoud het ontwerp.
+- [ ] Voeg passende doelgroepbeelden toe en controleer de nieuwe inhoud en links.
+
 - [x] Voeg de aangeleverde adviseursteksten met vergelijkbare lengte toe, met afwisselend links/rechts geplaatste portretten, en controleer de weergave.
 
 - [x] Rond de BASE FINANCE-pagina’s af en los huidige typefouten op
