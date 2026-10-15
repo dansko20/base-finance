@@ -3,24 +3,26 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Home, LineChart } from "lucide-react";
 
-import heroImg from "@/assets/hero-advies.jpg";
-import overGesprek from "@/assets/over-gesprek.jpg";
-import overWoning from "@/assets/over-woning.jpg";
-import overLaptop from "@/assets/over-laptop.jpg";
-import dienstHypotheek from "@/assets/dienst-hypotheek.jpg";
-import dienstBeleggen from "@/assets/dienst-beleggen.jpg";
+import heroImg from "@/assets/starters-eerste-appartement.jpg";
+import overGesprek from "@/assets/starters-adviesgesprek.jpg";
+import overWoning from "@/assets/starter-huissleutels.jpg";
+import overLaptop from "@/assets/starter-financien.jpg";
+import dienstHypotheek from "@/assets/starter-huissleutels.jpg";
+import dienstBeleggen from "@/assets/starter-financien.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
-import { PillLink } from "@/components/site/PillButton";
+import { PillAnchor, PillLink } from "@/components/site/PillButton";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "BASE FINANCE — Advies voor hypotheek en vermogen" },
       {
         name: "description",
         content:
-          "Duurzaam en persoonlijk advies over hypotheken, beleggen en vermogen. Plan een gratis kennismaking met BASE FINANCE in Rotterdam.",
+          "Je eerste baan, je eerste belegging en straks je eigen huis. BASE FINANCE helpt starters met één vaste adviseur en een helder plan.",
       },
       {
         property: "og:title",
@@ -29,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Duurzaam en persoonlijk advies over hypotheken, beleggen en vermogen.",
+          "Rust en grip op je toekomst: hypotheekadvies en beleggingsadvies voor starters met één vaste adviseur.",
       },
     ],
   }),
@@ -41,13 +43,13 @@ const diensten = [
     icon: Home,
     title: "Hypotheekadvies",
     image: dienstHypotheek,
-    text: "Van eerste woning tot oversluiten: wij vergelijken de hele markt en kiezen wat bij jouw leven past.",
+    text: "Je eerste huis begint met overzicht: wat kun je lenen en welke maandlast past bij je?",
   },
   {
     icon: LineChart,
     title: "Beleggingsadvies",
     image: dienstBeleggen,
-    text: "Een portefeuille met duidelijke risico's, lage kosten en een duurzame invulling die je begrijpt.",
+    text: "Samen kijken we of beleggen past bij je koopwens, je spaargeld en de tijd die je hebt.",
   },
 ];
 
@@ -67,7 +69,7 @@ function Home_() {
         <motion.div style={{ y: bgY }} className="absolute inset-0 -z-10 scale-110">
           <img
             src={heroImg}
-            alt="Adviseurs van BASE FINANCE in gesprek met een klant"
+            alt="Jong stel met verhuisdozen in hun eerste appartement"
             width={1920}
             height={1088}
             className="size-full object-cover"
@@ -85,9 +87,7 @@ function Home_() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] font-medium leading-[1.02] text-hero-foreground"
           >
-            Onafhankelijk advies
-            <br />
-            voor hypotheek en vermogen
+            Jouw financiële toekomst begint vandaag.
           </motion.h1>
 
           <motion.p
@@ -96,8 +96,7 @@ function Home_() {
             transition={{ duration: 0.9, delay: 0.25 }}
             className="mt-6 max-w-xl text-hero-foreground/80"
           >
-            Duurzaam, persoonlijk en zonder verkooppraatjes. Wij rekenen jouw keuzes
-            door en kiezen samen de route die op lange termijn klopt.
+            Je eerste vaste baan, je eerste belegging, straks je eigen huis. Wij helpen je stap voor stap, met één vaste adviseur die met je meedenkt.
           </motion.p>
 
           <motion.div
@@ -119,30 +118,28 @@ function Home_() {
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-2">
             <Reveal>
-              <p className="label-eyebrow">Over ons</p>
+              <p className="label-eyebrow">Jouw volgende stap</p>
               <h2 className="mt-10 max-w-lg text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">
-                Advies dat verder kijkt
-                <br />
-                dan de laagste rente
+                Waar sta jij nu?
               </h2>
             </Reveal>
             <Reveal delay={0.15} className="lg:pt-1">
               <div className="max-w-xl space-y-6 text-muted-foreground">
                 <p>
-                  BASE FINANCE is volledig onafhankelijk. We ontvangen geen provisie van
-                  geldverstrekkers of fondsen, waardoor ons advies alleen gestuurd wordt
-                  door jouw situatie en jouw doelen.
+                  Ik huur nu, maar wanneer kan ik eigenlijk kopen?
                 </p>
                 <p>
-                  Duurzaamheid zit in alles wat we doen: van groene financieringen en
-                  verduurzaming van je woning tot beleggingsportefeuilles die rekening
-                  houden met klimaat en governance. Zo bouw je vermogen op waar je over
-                  twintig jaar nog blij mee bent.
+                  Ik heb wat spaargeld, maar ik weet niet of ik moet beleggen.
+                </p>
+                <p>Ik heb mijn eerste vaste baan. Wat zijn mijn volgende stappen?</p>
+                <p>Je hoeft het niet alleen uit te zoeken.</p>
+                <p>Van je eerste baan naar je eigen huis: samen maken we je toekomstplan, met overzicht en haalbare stappen.
+
                 </p>
                 <div className="pt-2">
-                  <PillLink to="/over-ons" variant="outline">
-                    Meer over ons kantoor
-                  </PillLink>
+                  <PillAnchor href="/werkwijze#jouw-financiele-toekomst" variant="outline">
+                    Ontdek jouw toekomstplan
+                  </PillAnchor>
                 </div>
               </div>
             </Reveal>
@@ -150,9 +147,9 @@ function Home_() {
 
           <div className="mt-16 grid gap-5 sm:grid-cols-3">
             {[
-              { src: overGesprek, alt: "Adviesgesprek aan tafel" },
-              { src: overWoning, alt: "Duurzame woning met zonnepanelen" },
-              { src: overLaptop, alt: "Laptop met rendementsgrafiek" },
+              { src: overGesprek, alt: "Starter in gesprek met een jonge adviseur" },
+              { src: overWoning, alt: "Jonge vrouw met de sleutels van haar eerste huis" },
+              { src: overLaptop, alt: "Jongvolwassene bekijkt haar financiën aan de keukentafel" },
             ].map((img, i) => (
               <Reveal key={img.alt} delay={i * 0.12}>
                 <img
@@ -183,8 +180,7 @@ function Home_() {
             </Reveal>
             <Reveal delay={0.15}>
               <p className="max-w-md text-muted-foreground lg:mt-20">
-                Alles hangt met elkaar samen. Daarom bekijken we je hypotheek, je
-                vermogen en je woonlasten in samenhang, niet als losse producten.
+                Eén vaste adviseur kijkt met je mee bij beleggen én je hypotheek. Duurzame keuzes nemen we mee, maar jouw situatie staat voorop.
               </p>
             </Reveal>
           </div>
@@ -262,9 +258,9 @@ function Home_() {
           <Reveal>
             <p className="label-eyebrow">Werkwijze</p>
             <h2 className="mt-8 max-w-xl text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">
-              In vier stappen
+              Van eerste gesprek
               <br />
-              naar rust in je geldzaken
+              naar je eigen huis
             </h2>
           </Reveal>
 
@@ -273,22 +269,22 @@ function Home_() {
               {
                 step: "01",
                 title: "Kennismaking",
-                text: "Een vrijblijvend gesprek van een uur over je plannen, je woonwens en je vermogen.",
+                text: "We luisteren naar je vragen, je woonwens en wat je nu al hebt gespaard.",
               },
               {
                 step: "02",
                 title: "Analyse",
-                text: "We brengen inkomen, lasten, risico's en duurzaamheidskansen volledig in kaart.",
+                text: "We zetten je inkomen, uitgaven en spaargeld op een rij. Dat geeft overzicht.",
               },
               {
                 step: "03",
                 title: "Advies",
-                text: "Je krijgt een helder rapport met scenario's, kosten en onze concrete aanbeveling.",
+                text: "Je krijgt een helder plan voor je koopwens. Beleggen bespreken we alleen als het bij je past.",
               },
               {
                 step: "04",
                 title: "Uitvoering",
-                text: "Wij regelen aanvraag, notaris en overdracht en blijven je jaarlijks volgen.",
+                text: "Dezelfde adviseur helpt met je hypotheek en blijft bereikbaar voor je vragen.",
               },
             ].map((s, i) => (
               <Reveal key={s.step} delay={i * 0.12}>

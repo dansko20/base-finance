@@ -5,6 +5,8 @@ import { Reveal } from "@/components/site/motion";
 
 export const Route = createFileRoute("/rekentools")({
   head: () => ({ meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     { title: "Rekentools | BASE FINANCE" },
     { name: "description", content: "Bereken een indicatie van je maximale hypotheek met de normen van 2026." },
     { property: "og:title", content: "Rekentools | BASE FINANCE" },

@@ -7,6 +7,8 @@ import { Reveal } from "@/components/site/motion";
 
 export const Route = createFileRoute("/plan-een-gesprek")({
   head: () => ({ meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     { title: "Plan een gesprek | BASE FINANCE" },
     { name: "description", content: "Plan een gratis en vrijblijvende kennismaking met een financieel adviseur van BASE FINANCE." },
     { property: "og:title", content: "Plan een gesprek | BASE FINANCE" },

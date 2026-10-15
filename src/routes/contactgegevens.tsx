@@ -4,6 +4,8 @@ import { Reveal } from "@/components/site/motion";
 
 export const Route = createFileRoute("/contactgegevens")({
   head: () => ({ meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     { title: "Contactgegevens | BASE FINANCE" },
     { name: "description", content: "Telefoonnummer, e-mailadres en bezoekadres van BASE FINANCE in Rotterdam." },
     { property: "og:title", content: "Contactgegevens | BASE FINANCE" },
