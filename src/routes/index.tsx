@@ -4,11 +4,8 @@ import { useRef } from "react";
 import { Home, LineChart } from "lucide-react";
 
 import heroImg from "@/assets/starters-eerste-appartement.jpg";
-import overGesprek from "@/assets/starters-adviesgesprek.jpg";
-import overWoning from "@/assets/starter-huissleutels.jpg";
-import overLaptop from "@/assets/starter-financien.jpg";
 import dienstHypotheek from "@/assets/starter-huissleutels.jpg";
-import dienstBeleggen from "@/assets/starter-financien.jpg";
+import dienstBeleggen from "@/assets/starter-beleggen-man.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillAnchor, PillLink } from "@/components/site/PillButton";
@@ -144,25 +141,6 @@ function Home_() {
               </div>
             </Reveal>
           </div>
-
-          <div className="mt-16 grid gap-5 sm:grid-cols-3">
-            {[
-              { src: overGesprek, alt: "Starter in gesprek met een jonge adviseur" },
-              { src: overWoning, alt: "Jonge vrouw met de sleutels van haar eerste huis" },
-              { src: overLaptop, alt: "Jongvolwassene bekijkt haar financiën aan de keukentafel" },
-            ].map((img, i) => (
-              <Reveal key={img.alt} delay={i * 0.12}>
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                  width={1024}
-                  height={1280}
-                  className="h-[300px] w-full rounded-xl object-cover sm:h-[420px]"
-                />
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -195,7 +173,7 @@ function Home_() {
                     loading="lazy"
                     width={1024}
                     height={1024}
-                    className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="h-80 w-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                   <div className="p-6">
                     <d.icon className="size-6 text-primary" />
