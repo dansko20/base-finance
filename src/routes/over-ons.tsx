@@ -49,7 +49,7 @@ function OverOns() {
         <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-2">
           <Reveal>
             <p className="label-eyebrow">Over ons</p>
-            <h2 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
+            <h1 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
               Jouw Base Camp
             </h1>
           </Reveal>
