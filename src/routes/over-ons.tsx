@@ -51,7 +51,7 @@ function OverOns() {
             <p className="label-eyebrow">Over ons</p>
             <h2 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
               Jouw Base Camp
-            </h2>
+            </h1>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="max-w-xl space-y-6 text-muted-foreground lg:pt-24">
