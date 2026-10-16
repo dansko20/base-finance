@@ -102,7 +102,7 @@ function OverOns() {
         </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-8 pt-16">
         <div className="mx-auto grid max-w-[1400px] gap-5 px-5 sm:grid-cols-3 sm:px-8">
           {[
             { src: overGesprek, alt: "Ontspannen gesprek tussen een starter en een jonge adviseur" },
