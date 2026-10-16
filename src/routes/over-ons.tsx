@@ -33,13 +33,25 @@ export const Route = createFileRoute("/over-ons")({
 function OverOns() {
   return (
     <>
-      <section className="bg-background px-5 pb-16 pt-40 sm:px-8">
+      <section className="bg-background px-5 pb-8 pt-40 sm:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <Reveal>
+            <div className="rounded-xl bg-primary p-8 text-primary-foreground sm:p-12 lg:p-16">
+              <p className="max-w-5xl text-[clamp(1.375rem,2.6vw,2.25rem)] font-medium leading-[1.3]">
+                BASE FINANCE helpt starters van 21 tot 35 jaar met een vast inkomen rond modaal op weg naar hun eerste huis. We beginnen jaren vóór de aankoop. Met beleggingsadvies bouw je eigen geld op, en we geven je een sleuteldatum: wanneer je naar verwachting kunt kopen. Is het zover, dan regelen we ook je hypotheekadvies, met korting omdat je al klant bent.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-background px-5 pb-16 pt-16 sm:px-8">
         <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-2">
           <Reveal>
             <p className="label-eyebrow">Over ons</p>
-            <h1 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
+            <h2 className="mt-8 max-w-xl text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.04]">
               Jouw Base Camp
-            </h1>
+            </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="max-w-xl space-y-6 text-muted-foreground lg:pt-24">
@@ -55,6 +67,38 @@ function OverOns() {
               </p>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="section-y bg-surface">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+          <Reveal>
+            <h2 className="max-w-xl text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">
+              Onze missie & visie
+            </h2>
+          </Reveal>
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            {[
+              {
+                title: "Onze missie",
+                quote: "Wij willen jonge mensen helpen om met vertrouwen financiële keuzes te maken voor hun toekomst.",
+                text: "BASE FINANCE wil jonge werkenden helpen om met vertrouwen financiële keuzes te maken. Het kopen van een eerste woning en het opbouwen van vermogen hebben grote gevolgen voor je financiële toekomst. Daarom vinden we het belangrijk dat je je mogelijkheden, kosten en risico’s begrijpt voordat je een beslissing neemt.",
+              },
+              {
+                title: "Onze visie",
+                quote: "Een toekomst waarin jonge mensen hun eerste woning kunnen kopen en bewust vermogen kunnen opbouwen.",
+                text: "BASE FINANCE streeft naar een toekomst waarin jonge werkenden met voldoende kennis en vertrouwen hun eerste woning kunnen kopen en bewust vermogen kunnen opbouwen. We ondersteunen je daarbij met een financieel plan dat ook na de aankoop van je woning relevant blijft.",
+              },
+            ].map((b, i) => (
+              <Reveal key={b.title} delay={i * 0.12}>
+                <div className="h-full rounded-xl bg-background p-8 sm:p-10">
+                  <h3 className="text-xl font-medium">{b.title}</h3>
+                  <p className="mt-5 text-2xl font-medium leading-snug">“{b.quote}”</p>
+                  <p className="mt-5 text-sm text-muted-foreground">{b.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
