@@ -37,9 +37,28 @@ function OverOns() {
         <div className="mx-auto max-w-[1400px]">
           <Reveal>
             <div className="rounded-xl bg-primary p-8 text-primary-foreground sm:p-12 lg:p-16">
-              <p className="max-w-5xl text-[clamp(1.375rem,2.6vw,2.25rem)] font-medium leading-[1.3]">
-                BASE FINANCE helpt starters van 21 tot 35 jaar met een vast inkomen rond modaal op weg naar hun eerste huis. We beginnen jaren vóór de aankoop. Met beleggingsadvies bouw je eigen geld op, en we geven je een sleuteldatum: wanneer je naar verwachting kunt kopen. Is het zover, dan regelen we ook je hypotheekadvies, met korting omdat je al klant bent.
+              <p className="text-sm text-primary-foreground/70">Voor starters van 21 tot 35 jaar</p>
+              <p className="mt-6 max-w-4xl text-[clamp(2rem,4.5vw,4rem)] font-medium leading-[1.06]">
+                Van je eerste vaste baan naar je eerste eigen huis.
               </p>
+              <p className="mt-6 max-w-2xl text-primary-foreground/80">
+                We beginnen jaren vóór de aankoop, zodat je niet pas bij de bezichtiging ontdekt wat er kan.
+              </p>
+              <div className="mt-12 grid gap-8 sm:grid-cols-3">
+                {[
+                  { n: "01", t: "Eigen geld opbouwen", d: "Met beleggingsadvies laat je je spaargeld voor je werken." },
+                  { n: "02", t: "Jouw sleuteldatum", d: "Je weet wanneer je naar verwachting kunt kopen." },
+                  { n: "03", t: "Hypotheek met korting", d: "Is het zover? Als klant krijg je korting op je hypotheekadvies." },
+                ].map((s, i) => (
+                  <Reveal key={s.n} delay={0.1 + i * 0.12}>
+                    <div className="border-t border-primary-foreground/20 pt-6">
+                      <p className="text-sm text-primary-foreground/60">{s.n}</p>
+                      <h3 className="mt-3 text-xl font-medium">{s.t}</h3>
+                      <p className="mt-2 text-sm text-primary-foreground/70">{s.d}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
