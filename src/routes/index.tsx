@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { Home, LineChart } from "lucide-react";
 
 import heroImg from "@/assets/starters-eerste-appartement.jpg";
-import dienstHypotheek from "@/assets/dienst-hypotheek-achter.jpg";
-import dienstBeleggen from "@/assets/dienst-beleggen-achter.jpg";
+import dienstHypotheek from "@/assets/hypotheek-sleutel-voordeur.jpg";
+import dienstBeleggen from "@/assets/beleggen-man-laptop-voorkant.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillAnchor, PillLink } from "@/components/site/PillButton";
