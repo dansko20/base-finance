@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { Home, LineChart } from "lucide-react";
 
 import heroImg from "@/assets/starters-eerste-appartement.jpg";
-import dienstHypotheek from "@/assets/starter-huissleutels.jpg";
-import dienstBeleggen from "@/assets/starter-beleggen-man.jpg";
+import dienstHypotheek from "@/assets/dienst-hypotheek-achter.jpg";
+import dienstBeleggen from "@/assets/dienst-beleggen-achter.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillAnchor, PillLink } from "@/components/site/PillButton";
@@ -171,9 +171,9 @@ function Home_() {
                     src={d.image}
                     alt={d.title}
                     loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="h-80 w-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-[1.04]"
+                    width={1280}
+                    height={800}
+                    className="h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                   <div className="p-6">
                     <d.icon className="size-6 text-primary" />
