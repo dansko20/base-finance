@@ -173,7 +173,7 @@ function Home_() {
                     loading="lazy"
                     width={1280}
                     height={800}
-                    className="h-[26rem] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="h-[26rem] w-full object-cover object-[center_18%] transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                   <div className="p-6">
                     <d.icon className="size-6 text-primary" />
