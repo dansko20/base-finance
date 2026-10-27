@@ -11,7 +11,7 @@ import { PillLink } from "@/components/site/PillButton";
 export const Route = createFileRoute("/over-ons")({
   head: () => ({
     meta: [
-      { title: "Over ons — Onafhankelijk en duurzaam | BASE FINANCE" },
+      { title: "Over ons | Onafhankelijk en duurzaam | BASE FINANCE" },
       {
         name: "description",
         content:
@@ -74,16 +74,9 @@ function OverOns() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="max-w-xl space-y-6 text-muted-foreground lg:pt-24">
-              <p>
-                BASE FINANCE is je basiskamp voor elke financiële stap. We helpen starters van 21 tot 35 jaar: je hebt je eerste vaste baan, huurt of woont nog thuis en denkt aan een eigen huis. Bij ons krijg je één vaste adviseur voor beleggen én je hypotheek.
-              </p>
-              <p>
-                Wij geven je één vaste adviseur en een helder plan, zodat je precies weet wanneer je je eigen huis kunt kopen. Eerlijk, zonder kleine lettertjes.
-              </p>
-              <p>We werken met een concrete streefdatum op basis van je situatie en duidelijke aannames. Dat is geen garantie: je inkomen, woningprijzen en rente kunnen veranderen. Samen houden we je plan actueel.
-              </p>
-              <p>Duurzaamheid nemen we mee in elk advies, maar jouw situatie staat altijd voorop. Zo bouw je aan rust en grip op je toekomst.
-              </p>
+              <p>BASE FINANCE is je basiskamp voor elke financiële stap. Voor starters van 21 tot 35 jaar: je eerste baan, je eerste belegging, straks je eigen huis.</p>
+              <p>Je krijgt één vaste adviseur voor beleggen én je hypotheek. Samen maken we een plan met een datum waarop je een huis kunt kopen. Die datum is een verwachting, geen garantie. We houden hem samen actueel.</p>
+              <p>Duurzaamheid nemen we altijd mee, maar jouw situatie gaat voor.</p>
             </div>
           </Reveal>
         </div>
@@ -180,12 +173,38 @@ function OverOns() {
         </div>
       </section>
 
+      <section className="section-y bg-background">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+          <Reveal>
+            <p className="label-eyebrow">Vergunningen en diploma's</p>
+            <h2 className="mt-8 max-w-xl text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">Je kunt op ons rekenen</h2>
+            <p className="mt-6 max-w-xl text-muted-foreground">Bij geldzaken wil je zeker weten dat je goed geholpen wordt. Daarom voldoen we aan alle regels voor financieel advies.</p>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Vergunning van de AFM", text: "We adviseren over hypotheken en beleggingen onder toezicht van de Autoriteit Financiële Markten." },
+              { title: "Aangesloten bij het Kifid", text: "Ben je niet tevreden en komen we er samen niet uit? Dan kun je terecht bij het Klachteninstituut Financiële Dienstverlening." },
+              { title: "Gediplomeerde adviseurs", text: "Al onze adviseurs hebben Wft Basis, plus Wft Hypothecair Krediet of Wft Vermogen. We houden onze kennis elk jaar bij." },
+              { title: "Ingeschreven bij de KvK", text: "We staan ingeschreven bij de Kamer van Koophandel." },
+              { title: "Verzekerd", text: "We hebben een beroepsaansprakelijkheidsverzekering." },
+            ].map((v, i) => (
+              <Reveal key={v.title} delay={i * 0.08}>
+                <div className="h-full rounded-xl bg-surface p-8">
+                  <h3 className="text-xl font-medium">{v.title}</h3>
+                  <p className="mt-4 text-sm text-muted-foreground">{v.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-y bg-primary text-primary-foreground">
         <div className="mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-3">
           {[
-            { value: 2008, label: "Opgericht in Rotterdam", plain: true },
+            { value: 2026, label: "Opgericht in Rotterdam", plain: true },
             { value: 5, label: "Adviseurs" },
-            { value: 96, suffix: "%", label: "Klanten beveelt ons aan" },
+            { value: 100, suffix: "%", label: "Van onze fondsen heeft een duurzaam doel" },
           ].map((s, i) => (
             <Reveal key={s.label} delay={i * 0.12}>
               <div className="border-t border-primary-foreground/20 pt-6">
