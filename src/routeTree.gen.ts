@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as BeleggingsadviesRouteImport } from './routes/beleggingsadvies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactgegevensRouteImport } from './routes/contactgegevens'
@@ -18,11 +19,17 @@ import { Route as HypotheekadviesRouteImport } from './routes/hypotheekadvies'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
 import { Route as PlanEenGesprekRouteImport } from './routes/plan-een-gesprek'
 import { Route as RekentoolsRouteImport } from './routes/rekentools'
+import { Route as TarievenRouteImport } from './routes/tarieven'
 import { Route as WerkwijzeRouteImport } from './routes/werkwijze'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
+  id: '/algemene-voorwaarden',
+  path: '/algemene-voorwaarden',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BeleggingsadviesRoute = BeleggingsadviesRouteImport.update({
@@ -65,6 +72,11 @@ const RekentoolsRoute = RekentoolsRouteImport.update({
   path: '/rekentools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TarievenRoute = TarievenRouteImport.update({
+  id: '/tarieven',
+  path: '/tarieven',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WerkwijzeRoute = WerkwijzeRouteImport.update({
   id: '/werkwijze',
   path: '/werkwijze',
@@ -73,6 +85,7 @@ const WerkwijzeRoute = WerkwijzeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/beleggingsadvies': typeof BeleggingsadviesRoute
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
@@ -81,10 +94,12 @@ export interface FileRoutesByFullPath {
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
+  '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/beleggingsadvies': typeof BeleggingsadviesRoute
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
@@ -93,11 +108,13 @@ export interface FileRoutesByTo {
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
+  '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/beleggingsadvies': typeof BeleggingsadviesRoute
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
@@ -106,12 +123,14 @@ export interface FileRoutesById {
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
+  '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/algemene-voorwaarden'
     | '/beleggingsadvies'
     | '/contact'
     | '/contactgegevens'
@@ -120,10 +139,12 @@ export interface FileRouteTypes {
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
+    | '/tarieven'
     | '/werkwijze'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/algemene-voorwaarden'
     | '/beleggingsadvies'
     | '/contact'
     | '/contactgegevens'
@@ -132,10 +153,12 @@ export interface FileRouteTypes {
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
+    | '/tarieven'
     | '/werkwijze'
   id:
     | '__root__'
     | '/'
+    | '/algemene-voorwaarden'
     | '/beleggingsadvies'
     | '/contact'
     | '/contactgegevens'
@@ -144,11 +167,13 @@ export interface FileRouteTypes {
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
+    | '/tarieven'
     | '/werkwijze'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
   BeleggingsadviesRoute: typeof BeleggingsadviesRoute
   ContactRoute: typeof ContactRoute
   ContactgegevensRoute: typeof ContactgegevensRoute
@@ -157,6 +182,7 @@ export interface RootRouteChildren {
   OverOnsRoute: typeof OverOnsRoute
   PlanEenGesprekRoute: typeof PlanEenGesprekRoute
   RekentoolsRoute: typeof RekentoolsRoute
+  TarievenRoute: typeof TarievenRoute
   WerkwijzeRoute: typeof WerkwijzeRoute
 }
 
@@ -167,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/algemene-voorwaarden': {
+      id: '/algemene-voorwaarden'
+      path: '/algemene-voorwaarden'
+      fullPath: '/algemene-voorwaarden'
+      preLoaderRoute: typeof AlgemeneVoorwaardenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/beleggingsadvies': {
@@ -225,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RekentoolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tarieven': {
+      id: '/tarieven'
+      path: '/tarieven'
+      fullPath: '/tarieven'
+      preLoaderRoute: typeof TarievenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/werkwijze': {
       id: '/werkwijze'
       path: '/werkwijze'
@@ -237,6 +277,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
   BeleggingsadviesRoute: BeleggingsadviesRoute,
   ContactRoute: ContactRoute,
   ContactgegevensRoute: ContactgegevensRoute,
@@ -245,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   OverOnsRoute: OverOnsRoute,
   PlanEenGesprekRoute: PlanEenGesprekRoute,
   RekentoolsRoute: RekentoolsRoute,
+  TarievenRoute: TarievenRoute,
   WerkwijzeRoute: WerkwijzeRoute,
 }
 export const routeTree = rootRouteImport

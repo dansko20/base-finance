@@ -216,8 +216,8 @@ function Home_() {
                     <CountUp
                       to={stat.value}
                       prefix={stat.prefix ?? ""}
-                      suffix={stat.suffix ?? ""}
-                      decimals={stat.decimals ?? 0}
+                      suffix=""
+                      decimals={0}
                     />
                   </p>
                   <p className="mt-4 text-sm text-primary-foreground/70">{stat.label}</p>
