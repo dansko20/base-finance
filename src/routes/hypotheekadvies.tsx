@@ -27,7 +27,7 @@ const doelgroepen = [
 
 const faq = [
   { vraag: "Is de eerste kennismaking gratis?", antwoord: "Ja. In het eerste gesprek bespreken we je situatie, wensen en de verwachte kosten van een vervolgtraject." },
-  { vraag: "Vergelijken jullie alle geldverstrekkers?", antwoord: "We werken onafhankelijk en vergelijken een breed aanbod op rente, voorwaarden en flexibiliteit." },
+  { vraag: "Vergelijken jullie alle geldverstrekkers?", antwoord: "We zijn onafhankelijk en vergelijken vijf aanbieders op rente, voorwaarden en duurzaamheid. Op de pagina Onze partners zie je welke en waarom." },
   { vraag: "Kan verduurzaming worden meegefinancierd?", antwoord: "Vaak wel. We bekijken het energielabel, de maatregelen en de extra leenruimte die daarbij mogelijk is." },
   { vraag: "Hoe lang duurt een hypotheekaanvraag?", antwoord: "Dat verschilt per situatie en geldverstrekker. Je krijgt vooraf een realistische planning en tijdens het traject houden we je op de hoogte." },
 ];
@@ -73,6 +73,19 @@ function Hypotheekadvies() {
       </section>
 
       <section className="section-y bg-surface">
+        <div className="mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-2">
+          <Reveal><p className="label-eyebrow">Oversluiten</p><h2 className="mt-8 max-w-xl text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">Oversluiten: alleen als het je iets oplevert</h2></Reveal>
+          <Reveal delay={0.12}>
+            <div className="max-w-xl space-y-5 text-muted-foreground">
+              <p>Oversluiten betekent dat je je huidige hypotheek vervangt door een nieuwe, meestal omdat de rente lager is. Dat kost wel geld: vaak een boeterente (de boete die je bank vraagt als je eerder aflost), advieskosten, een notaris en soms een taxatie.</p>
+              <p>Wij rekenen eerst voor je uit na hoeveel maanden je die kosten hebt terugverdiend. Levert het niets op? Dan zeggen we dat eerlijk. Goed om te weten: boeterente en advieskosten zijn meestal aftrekbaar van de belasting.</p>
+            </div>
+            <div className="mt-9"><PillLink to="/tarieven" variant="outline">Bekijk de kosten van oversluiten</PillLink></div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-y bg-background">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal><p className="label-eyebrow">Veelgestelde vragen</p><h2 className="mb-10 mt-8 text-4xl font-medium">Goed om vooraf te weten</h2></Reveal>
           <Faq items={faq} />
