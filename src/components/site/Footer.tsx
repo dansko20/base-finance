@@ -8,6 +8,9 @@ const menu: { to: AppPath; label: string }[] = [
   { to: "/rekentools", label: "Rekentools" },
   { to: "/over-ons", label: "Over ons" },
   { to: "/werkwijze", label: "Onze werkwijze" },
+  { to: "/tarieven", label: "Tarieven" },
+  { to: "/onze-partners", label: "Onze partners" },
+  { to: "/algemene-voorwaarden", label: "Algemene voorwaarden" },
   { to: "/contactgegevens", label: "Contact" },
 ];
 
@@ -64,8 +67,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground">
           <p>
-            © BASE FINANCE B.V. {new Date().getFullYear()} · AFM-vergunning ·
-            KvK 87654321
+            © BASE FINANCE {new Date().getFullYear()} · Fictief adviesbureau, ontwikkeld voor een schoolproject van Hogeschool Inholland.
           </p>
           <button
             type="button"

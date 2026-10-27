@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { title: "BASE FINANCE — Advies voor hypotheek en vermogen" },
+      { title: "BASE FINANCE | Advies voor hypotheek en vermogen" },
       {
         name: "description",
         content:
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "BASE FINANCE — Onafhankelijk advies voor hypotheek en vermogen",
+        content: "BASE FINANCE | Onafhankelijk advies voor hypotheek en vermogen",
       },
       {
         property: "og:description",
@@ -199,18 +199,16 @@ function Home_() {
           <Reveal>
             <p className="text-sm text-primary-foreground/60">In cijfers</p>
             <h2 className="mt-8 max-w-2xl text-[clamp(2rem,4vw,3.5rem)] font-medium leading-[1.08]">
-              Resultaten waar
-              <br />
-              onze klanten op bouwen
+              Waar je op kunt bouwen
             </h2>
           </Reveal>
 
           <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { value: 1850, suffix: "+", label: "Begeleide hypotheekaanvragen" },
-              { value: 420, prefix: "€", suffix: " mln", label: "Geadviseerd vermogen" },
-              { value: 9.4, decimals: 1, label: "Gemiddelde klantbeoordeling" },
-              { value: 18, label: "Jaar ervaring in de markt" },
+              { value: 0, prefix: "€", label: "Provisie van banken of fondsen" },
+              { value: 1, label: "Vaste adviseur voor beleggen én je hypotheek" },
+              { value: 4, label: "Duurzame fondsen met een duurzaam doel (artikel 9)" },
+              { value: 0, prefix: "€", label: "Voor je eerste kennismaking" },
             ].map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.12}>
                 <div className="border-t border-primary-foreground/20 pt-6">
@@ -242,38 +240,29 @@ function Home_() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-xl bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-xl bg-border sm:grid-cols-2 lg:grid-cols-3">
             {[
-              {
-                step: "01",
-                title: "Kennismaking",
-                text: "We luisteren naar je vragen, je woonwens en wat je nu al hebt gespaard.",
-              },
-              {
-                step: "02",
-                title: "Analyse",
-                text: "We zetten je inkomen, uitgaven en spaargeld op een rij. Dat geeft overzicht.",
-              },
-              {
-                step: "03",
-                title: "Advies",
-                text: "Je krijgt een helder plan voor je koopwens. Beleggen bespreken we alleen als het bij je past.",
-              },
-              {
-                step: "04",
-                title: "Uitvoering",
-                text: "Dezelfde adviseur helpt met je hypotheek en blijft bereikbaar voor je vragen.",
-              },
+              { step: "01", title: "Oriëntatie", text: "Kijk rond en reken alvast uit wat er kan.", gratis: true },
+              { step: "02", title: "Kennismakingsgesprek", text: "Je vertelt over je situatie, wensen en doelen.", gratis: true },
+              { step: "03", title: "Inventarisatie", text: "We zetten je inkomen, uitgaven en spaargeld op een rij.", gratis: true },
+              { step: "04", title: "Adviestraject", text: "Je vaste adviseur werkt een persoonlijk advies uit." },
+              { step: "05", title: "Adviesrapport", text: "Een helder rapport met een verwachte koopdatum." },
+              { step: "06", title: "Begeleiding en nazorg", text: "We helpen met de uitvoering en blijven bereikbaar." },
             ].map((s, i) => (
               <Reveal key={s.step} delay={i * 0.12}>
                 <div className="h-full bg-background p-8">
-                  <span className="text-sm text-primary">{s.step}</span>
+                  <div className="flex items-center gap-3"><span className="text-sm text-primary">{s.step}</span>{s.gratis ? <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs text-primary">Gratis</span> : null}</div>
                   <h3 className="mt-6 text-xl font-medium">{s.title}</h3>
                   <p className="mt-3 text-sm text-muted-foreground">{s.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.2}>
+            <div className="mt-12 flex justify-center">
+              <PillLink to="/werkwijze">Bekijk de hele klantreis</PillLink>
+            </div>
+          </Reveal>
         </div>
       </section>
 

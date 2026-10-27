@@ -12,7 +12,10 @@ export type AppPath =
   | "/over-ons"
   | "/werkwijze"
   | "/plan-een-gesprek"
-  | "/contactgegevens";
+  | "/contactgegevens"
+  | "/tarieven"
+  | "/onze-partners"
+  | "/algemene-voorwaarden";
 
 type Variant = "primary" | "outline" | "ghost";
 
