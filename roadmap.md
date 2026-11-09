@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Herstel de ontbrekende partnerpagina volgens de aangeleverde feedback en controleer de navigatie op desktop en mobiel.
+
 - [x] Verbeter teksten voor starters, verdeel toekomstplan en Base Camp over bestaande pagina’s en behoud het ontwerp.
 - [x] Voeg passende doelgroepbeelden toe en controleer de nieuwe inhoud en links.
 
