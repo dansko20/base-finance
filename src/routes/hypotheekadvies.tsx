@@ -27,7 +27,7 @@ const doelgroepen = [
 
 const faq = [
   { vraag: "Is de eerste kennismaking gratis?", antwoord: "Ja. In het eerste gesprek bespreken we je situatie, wensen en de verwachte kosten van een vervolgtraject." },
-  { vraag: "Vergelijken jullie alle geldverstrekkers?", antwoord: "We zijn onafhankelijk en vergelijken vijf aanbieders op rente, voorwaarden en duurzaamheid. Op de pagina Onze partners zie je welke en waarom." },
+  { vraag: "Vergelijken jullie alle geldverstrekkers?", antwoord: "Nee. In ons studentenproject hebben we meerdere aanbieders onderzocht en Allianz en ASN Bank gekozen. We kijken naar rente, voorwaarden en duurzaamheid, met jouw situatie voorop. Op de pagina Onze partners lees je waarom. We hebben geen officiële samenwerking met deze aanbieders." },
   { vraag: "Kan verduurzaming worden meegefinancierd?", antwoord: "Vaak wel. We bekijken het energielabel, de maatregelen en de extra leenruimte die daarbij mogelijk is." },
   { vraag: "Hoe lang duurt een hypotheekaanvraag?", antwoord: "Dat verschilt per situatie en geldverstrekker. Je krijgt vooraf een realistische planning en tijdens het traject houden we je op de hoogte." },
 ];
