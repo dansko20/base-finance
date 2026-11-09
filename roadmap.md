@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Herstel de ontbrekende partnerpagina volgens de aangeleverde feedback en controleer de navigatie op desktop en mobiel.
+- [ ] Vul de vijf hypotheekaanbieders en hun onderbouwing aan; wacht op aangeleverde namen en toelichting.
+
 - [x] Verbeter teksten voor starters, verdeel toekomstplan en Base Camp over bestaande pagina’s en behoud het ontwerp.
 - [x] Voeg passende doelgroepbeelden toe en controleer de nieuwe inhoud en links.
 
