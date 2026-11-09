@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactgegevensRouteImport } from './routes/contactgegevens'
 import { Route as DienstenRouteImport } from './routes/diensten'
 import { Route as HypotheekadviesRouteImport } from './routes/hypotheekadvies'
+import { Route as OnzePartnersRouteImport } from './routes/onze-partners'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
 import { Route as PlanEenGesprekRouteImport } from './routes/plan-een-gesprek'
 import { Route as RekentoolsRouteImport } from './routes/rekentools'
@@ -57,6 +58,11 @@ const HypotheekadviesRoute = HypotheekadviesRouteImport.update({
   path: '/hypotheekadvies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnzePartnersRoute = OnzePartnersRouteImport.update({
+  id: '/onze-partners',
+  path: '/onze-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OverOnsRoute = OverOnsRouteImport.update({
   id: '/over-ons',
   path: '/over-ons',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
+  '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
+  '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
+  '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
   '/plan-een-gesprek': typeof PlanEenGesprekRoute
   '/rekentools': typeof RekentoolsRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/contactgegevens'
     | '/diensten'
     | '/hypotheekadvies'
+    | '/onze-partners'
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/contactgegevens'
     | '/diensten'
     | '/hypotheekadvies'
+    | '/onze-partners'
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/contactgegevens'
     | '/diensten'
     | '/hypotheekadvies'
+    | '/onze-partners'
     | '/over-ons'
     | '/plan-een-gesprek'
     | '/rekentools'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   ContactgegevensRoute: typeof ContactgegevensRoute
   DienstenRoute: typeof DienstenRoute
   HypotheekadviesRoute: typeof HypotheekadviesRoute
+  OnzePartnersRoute: typeof OnzePartnersRoute
   OverOnsRoute: typeof OverOnsRoute
   PlanEenGesprekRoute: typeof PlanEenGesprekRoute
   RekentoolsRoute: typeof RekentoolsRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HypotheekadviesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onze-partners': {
+      id: '/onze-partners'
+      path: '/onze-partners'
+      fullPath: '/onze-partners'
+      preLoaderRoute: typeof OnzePartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/over-ons': {
       id: '/over-ons'
       path: '/over-ons'
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactgegevensRoute: ContactgegevensRoute,
   DienstenRoute: DienstenRoute,
   HypotheekadviesRoute: HypotheekadviesRoute,
+  OnzePartnersRoute: OnzePartnersRoute,
   OverOnsRoute: OverOnsRoute,
   PlanEenGesprekRoute: PlanEenGesprekRoute,
   RekentoolsRoute: RekentoolsRoute,
