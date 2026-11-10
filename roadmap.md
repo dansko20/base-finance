@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Verwerk de vijf aangeleverde fondsen, toon BASE FONDS met het eigen logo en controleer bijbehorende teksten en kosten.
+
 - [x] Herstel de ontbrekende partnerpagina volgens de aangeleverde feedback en controleer de navigatie op desktop en mobiel.
 - [ ] Voeg de twee aangeleverde hypotheekaanbieders Allianz en ASN Bank toe, met keuzecriteria, voorwaarden en disclaimer; vervang de vijf placeholders en controleer desktop en mobiel.
 

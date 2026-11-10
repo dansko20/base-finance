@@ -13,3 +13,4 @@
 - Keep advisor profiles and their presentation in the dedicated AdvisorTeam component so team updates stay independent of the rest of the About page.
 - Keep the detailed future-plan explanation on the existing workflow page with a same-page anchor from the homepage teaser, so navigation stays unchanged and the homepage remains brief.
 - Keep partner comparison data and weighted scores separate from the partners page so the supplied methodology is independently testable.
+- Keep fund selection and numeric costs separate from fund presentation so supplied cost changes can be tested independently.
