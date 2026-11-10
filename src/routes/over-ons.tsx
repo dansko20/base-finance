@@ -204,7 +204,7 @@ function OverOns() {
           {[
             { value: 2026, label: "Opgericht in Rotterdam", plain: true },
             { value: 5, label: "Adviseurs" },
-            { value: 100, suffix: "%", label: "Van onze fondsen heeft een duurzaam doel" },
+            { value: 5, label: "Geselecteerde fondsen, inclusief BASE FONDS" },
           ].map((s, i) => (
             <Reveal key={s.label} delay={i * 0.12}>
               <div className="border-t border-primary-foreground/20 pt-6">
