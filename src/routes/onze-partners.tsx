@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import asnLogo from "@/assets/partner-asn.png.asset.json";
+import candriamLogo from "@/assets/partner-candriam.png.asset.json";
+import fidelityLogo from "@/assets/partner-fidelity.png.asset.json";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PillLink } from "@/components/site/PillButton";
 import { Reveal } from "@/components/site/motion";
@@ -40,9 +42,9 @@ function OnzePartners() {
         </Reveal><div className="mt-12 grid gap-6 lg:grid-cols-3">{criteria.map((item, i) => <Reveal key={item.title} delay={i * 0.08}><article className="h-full rounded-xl bg-background p-8"><p className="text-sm text-primary">Telt voor {item.weight}</p><h3 className="mt-5 text-2xl font-medium">{item.title}</h3><p className="mt-4 text-muted-foreground">{item.text}</p></article></Reveal>)}</div></div></section>
         <section className="section-y bg-background"><div className="mx-auto max-w-[1400px] px-5 sm:px-8"><Reveal><p className="label-eyebrow">Onze keuze</p><h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium">ASN Impact Investors, Candriam en Fidelity International</h2></Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">{[
-            { name: "Candriam", logo: null, text: "Voor onze fondsselectie kiezen we het fonds voor circulaire economie, in de klasse zonder provisie. Het richt zich op minder afval, hergebruik en producten die langer meegaan." },
+            { name: "Candriam", logo: candriamLogo.url, text: "Voor onze fondsselectie kiezen we het fonds voor circulaire economie, in de klasse zonder provisie. Het richt zich op minder afval, hergebruik en producten die langer meegaan." },
             { name: "ASN Impact Investors", logo: asnLogo.url, text: "We kiezen het aandelenfonds en het Milieu & Waterfonds vanwege de strenge duurzaamheidsregels en de begrijpelijke uitleg in het Nederlands." },
-            { name: "Fidelity International", logo: null, text: "We kiezen het fonds voor duurzame bedrijfsobligaties als aanvulling op de aandelenfondsen. Dit kan helpen het risico te verlagen, maar ook obligaties kunnen in waarde dalen." },
+            { name: "Fidelity International", logo: fidelityLogo.url, text: "We kiezen het fonds voor duurzame bedrijfsobligaties als aanvulling op de aandelenfondsen. Dit kan helpen het risico te verlagen, maar ook obligaties kunnen in waarde dalen." },
           ].map((item, i) => <Reveal key={item.name} delay={i * 0.08}><article className="h-full rounded-xl bg-surface p-8">{item.logo && <div className="inline-flex rounded-lg bg-background p-3"><img src={item.logo} alt={`Logo van ${item.name}`} className="h-12 w-auto max-w-full object-contain" loading="lazy" /></div>}<h3 className="mt-6 text-2xl font-medium">{item.name}</h3><p className="mt-4 text-muted-foreground">{item.text}</p></article></Reveal>)}</div>
         </div></section>
         <section className="section-y bg-surface"><div className="mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-2"><Reveal><p className="label-eyebrow">De fondsen</p><h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium">Van beheerder naar fonds</h2></Reveal><Reveal delay={0.12}><p className="text-muted-foreground">De beheerdervergelijking hieronder is de eerste stap, niet de uiteindelijke fondsselectie. Robeco heeft daarin de hoogste totaalscore. Voor onze uiteindelijke selectie vergeleken we fondsen van ASN Impact Investors, Candriam en Fidelity International op strategie, risico en rendement, kosten, communicatie, klimaatrisico’s en begrijpelijkheid. Daarnaast tonen we BASE FONDS, ons eigen oefenfonds uit het beleggingsspel van onze opleiding.</p><div className="mt-9"><PillLink to="/beleggingsadvies">Bekijk de fondsen</PillLink></div></Reveal></div></section>

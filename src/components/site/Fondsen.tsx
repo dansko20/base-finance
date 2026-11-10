@@ -1,10 +1,14 @@
 import asnLogo from "@/assets/partner-asn.png.asset.json";
 import baseLogo from "@/assets/base-finance-logo.png.asset.json";
+import candriamLogo from "@/assets/partner-candriam.png.asset.json";
+import fidelityLogo from "@/assets/partner-fidelity.png.asset.json";
 import { fundSelection, fundDisclaimer } from "@/lib/fundSelection";
 import { PillLink } from "./PillButton";
 import { Reveal } from "./motion";
 
 const percentage = (value: number) => `${value.toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+
+const logos = { asn: asnLogo.url, base: baseLogo.url, candriam: candriamLogo.url, fidelity: fidelityLogo.url };
 
 export function FondsenSecties() {
   return <>
@@ -17,7 +21,7 @@ export function FondsenSecties() {
     <section className="section-y bg-background"><div className="mx-auto max-w-[1400px] px-5 sm:px-8">
       <Reveal><p className="label-eyebrow">Fondsen</p><h2 className="mt-8 text-[clamp(2rem,4vw,3.5rem)] font-medium">Onze vijf fondsen</h2></Reveal>
       <div className="mt-12 grid gap-6 lg:grid-cols-2">{fundSelection.map((fund, i) => <Reveal key={fund.name} delay={i * 0.08}><article className="h-full rounded-xl bg-surface p-6 sm:p-8">
-        {fund.logo && <div className="inline-flex rounded-lg bg-background p-2"><img src={fund.logo === "base" ? baseLogo.url : asnLogo.url} alt={`Logo van ${fund.manager}`} className={fund.logo === "base" ? "size-16 object-contain" : "h-9 w-auto max-w-full object-contain"} loading="lazy" /></div>}
+        {fund.logo && <div className="inline-flex rounded-lg bg-background p-2"><img src={logos[fund.logo]} alt={`Logo van ${fund.manager}`} className={fund.logo === "asn" ? "h-9 w-auto max-w-full object-contain" : "size-16 object-contain"} loading="lazy" /></div>}
         <p className="mt-5 text-sm text-primary">{fund.kind}</p>
         <h3 className="mt-3 break-words text-2xl font-medium">{fund.name}</h3>
         <p className="mt-3 text-sm text-muted-foreground">Beheerder: {fund.manager}</p>

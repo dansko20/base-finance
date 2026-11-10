@@ -6,7 +6,7 @@ export const fundSelection = [
     caution: "Het fonds werkt pas sinds 2025 met het huidige beleid. Oudere rendementen zeggen daarom minder over de huidige aanpak.",
   },
   {
-    name: "Fidelity Sustainable Global Corporate Bond", manager: "Fidelity International", kind: "Wereldwijd obligatiefonds", logo: null,
+    name: "Fidelity Sustainable Global Corporate Bond", manager: "Fidelity International", kind: "Wereldwijd obligatiefonds", logo: "fidelity",
     explanation: "Belegt in duurzame bedrijfsobligaties: leningen aan bedrijven. Volgens ons aangeleverde onderzoek waren er bij deze beheerder de afgelopen jaren geen boetes of greenwashing, waarbij beleggingen duurzamer lijken dan ze zijn. Obligaties zijn bedoeld om het risico te verlagen, bijvoorbeeld als je huisaankoop dichterbij komt. Ook obligaties kunnen in waarde dalen.",
     annualCost: [0.70, 1.05], transactionCost: null,
     caution: "Het fonds bestaat pas sinds 2024 en belegt alleen in bedrijfsobligaties, niet in staatsobligaties. De kosten hangen af van de fondsklasse: de variant van het fonds waarin je belegt.",
@@ -18,7 +18,7 @@ export const fundSelection = [
     caution: "Een fonds met één thema schommelt meer dan een breed aandelenfonds.",
   },
   {
-    name: "Candriam Sustainable Equity Circular Economy", manager: "Candriam", kind: "Themafonds voor circulaire economie", logo: null,
+    name: "Candriam Sustainable Equity Circular Economy", manager: "Candriam", kind: "Themafonds voor circulaire economie", logo: "candriam",
     explanation: "Belegt in bedrijven die afval verminderen, materialen hergebruiken en producten langer laten meegaan. Wij kiezen de fondsklasse zonder provisie, zodat de kosten laag blijven.",
     annualCost: [1.10], transactionCost: 0.11,
     caution: "Volgens het aangeleverde onderzoek was het rendement over de afgelopen vijf jaar negatief. De informatie van Candriam is alleen in het Engels.",
