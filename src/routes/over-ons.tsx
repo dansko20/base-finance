@@ -209,7 +209,7 @@ function OverOns() {
             <Reveal key={s.label} delay={i * 0.12}>
               <div className="border-t border-primary-foreground/20 pt-6">
                 <p className="text-[clamp(2.5rem,5vw,4rem)] font-medium leading-none">
-                  {s.plain ? s.value : <CountUp to={s.value} suffix={s.suffix ?? ""} />}
+                  {s.plain ? s.value : <CountUp to={s.value} />}
                 </p>
                 <p className="mt-4 text-sm text-primary-foreground/70">{s.label}</p>
               </div>
