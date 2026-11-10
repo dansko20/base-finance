@@ -207,7 +207,7 @@ function Home_() {
             {[
               { value: 0, prefix: "€", label: "Provisie van banken of fondsen" },
               { value: 1, label: "Vaste adviseur voor beleggen én je hypotheek" },
-              { value: 4, label: "Duurzame fondsen met een duurzaam doel (artikel 9)" },
+              { value: 5, label: "Geselecteerde fondsen, inclusief ons eigen BASE FONDS" },
               { value: 0, prefix: "€", label: "Voor je eerste kennismaking" },
             ].map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.12}>
