@@ -107,7 +107,7 @@ export function SparenOfBeleggenTool() {
     }] : []),
   ];
 
-  const gunstiger = result.extraNettoRendement >= 0 ? "sparen en beleggen" : "alles sparen";
+  const gunstiger = result.extraNettoRendement >= 0 ? "Sparen en beleggen" : "Alles sparen";
   const uitkomst = (
     <div>
       <div className="overflow-hidden rounded-xl bg-primary text-primary-foreground">

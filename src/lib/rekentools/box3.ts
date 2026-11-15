@@ -67,7 +67,7 @@ export function berekenBox3(input: Box3Input): Box3Resultaat {
   const rendementsgrondslag = belastSparen + belastBeleggen - schuldenNaDrempel;
   const rendementSparen = belastSparen * FORFAIT_SPAREN;
   const rendementBeleggen = belastBeleggen * FORFAIT_BELEGGEN;
-  const rendementSchulden = -schuldenNaDrempel * FORFAIT_SCHULDEN;
+  const rendementSchulden = schuldenNaDrempel === 0 ? 0 : -schuldenNaDrempel * FORFAIT_SCHULDEN;
   const rendementOpVermogen = rendementSparen + rendementBeleggen + rendementSchulden;
   const effectiefRendement = rendementsgrondslag <= 0 ? 0 : rendementOpVermogen / rendementsgrondslag;
   const heffingsvrijVermogen = HEFFINGSVRIJ_VERMOGEN * personen;
