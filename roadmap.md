@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Bouw de hypotheektool om tot een vraag-voor-vraag-flow zonder tussentijdse uitkomst.
+- [ ] Voeg de tools Sparen of beleggen en Box 3-belasting toe op basis van de aangeleverde Excel.
+- [ ] Toets de box 3-berekeningen aan Excel en controleer alle drie de flows op desktop en mobiel.
+
 - [x] Verwerk de vijf aangeleverde fondsen, toon BASE FONDS met het eigen logo en controleer bijbehorende teksten en kosten.
 
 - [x] Herstel de ontbrekende partnerpagina volgens de aangeleverde feedback en controleer de navigatie op desktop en mobiel.
