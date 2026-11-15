@@ -133,7 +133,7 @@ function nettoScenario(box3: Box3Resultaat, spaarrente: number, beleggingsrendem
 }
 
 export function verwachtRendement(input: SparenOfBeleggenInput) {
-  if (input.risicoprofiel === "Eigen") return positief(input.eigenRendement) / 100;
+  if (input.risicoprofiel === "Eigen") return Number.isFinite(input.eigenRendement) ? input.eigenRendement / 100 : 0;
   return (RISICOPROFIELEN.find((profiel) => profiel.id === input.risicoprofiel)?.rendement ?? 0) / 100;
 }
 

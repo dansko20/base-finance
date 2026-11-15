@@ -129,7 +129,7 @@ export function RekentoolWizard({
   const [showResult, setShowResult] = useState(false);
   const [direction, setDirection] = useState(1);
   const activeIndex = Math.min(stepIndex, steps.length - 1);
-  const step = steps[activeIndex];
+  const step = steps[activeIndex]!;
 
   const next = () => {
     if (!step.isAnswered) return;

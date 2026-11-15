@@ -68,7 +68,7 @@ export function SparenOfBeleggenTool() {
       question: "Welk deel van dat bedrag wil je beleggen?",
       hint: "100% betekent dat het hele twijfelbedrag naar beleggingen gaat. Bij 0% vergelijk je twee keer alles sparen.",
       isAnswered: answered.has("deel-beleggen"),
-      content: <NumberQuestion label="Percentage beleggen" value={input.beleggingspercentage} prefix="" suffix="%" max={100} step={5} onAnswer={() => answer("deel-beleggen")} onChange={(value) => set("beleggingspercentage", value)} />,
+      content: <NumberQuestion label="Percentage beleggen" value={input.beleggingspercentage} prefix="" suffix="%" max={100} step={5} onAnswer={() => answer("deel-beleggen")} onChange={(value) => set("beleggingspercentage", Math.min(100, Math.max(0, value)))} />,
     },
     {
       id: "groen-beleggen",
@@ -103,7 +103,7 @@ export function SparenOfBeleggenTool() {
       question: "Welk beleggingsrendement verwacht je zelf per jaar?",
       hint: "Vul je verwachting na kosten in. De tool rekent met dit ene gemiddelde, maar werkelijke rendementen wisselen per jaar.",
       isAnswered: answered.has("eigen-rendement"),
-      content: <NumberQuestion label="Eigen verwacht rendement" value={input.eigenRendement} prefix="" suffix="%" step={0.1} onAnswer={() => answer("eigen-rendement")} onChange={(value) => set("eigenRendement", value)} />,
+      content: <NumberQuestion label="Eigen verwacht rendement" value={input.eigenRendement} prefix="" suffix="%" min={-100} step={0.1} onAnswer={() => answer("eigen-rendement")} onChange={(value) => set("eigenRendement", value)} />,
     }] : []),
   ];
 

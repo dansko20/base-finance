@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { DEFAULT_BOX3_INPUT, berekenBox3, type Box3Input } from "@/lib/rekentools/box3";
 import { euro, euro2 } from "@/lib/rekentools/maximaleHypotheek";
 import { BOX3_NORMJAAR, BOX3_TARIEF, FORFAIT_BELEGGEN, FORFAIT_SPAREN } from "@/lib/rekentools/normenBox3_2026";
-import { ChoiceGrid, NumberQuestion, RekentoolWizard, ResultRow, fieldClass, type WizardStep } from "./RekentoolWizard";
+import { ChoiceGrid, NumberQuestion, RekentoolWizard, ResultRow, type WizardStep } from "./RekentoolWizard";
 
 const percentage = (waarde: number) => `${(waarde * 100).toLocaleString("nl-NL", { maximumFractionDigits: 2 })}%`;
 
