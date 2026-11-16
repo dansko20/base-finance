@@ -38,7 +38,7 @@ export function NumberQuestion({
   placeholder = "0",
 }: NumberQuestionProps) {
   return (
-    <div className="relative mx-auto max-w-md">
+    <div className="relative w-full max-w-2xl">
       {prefix ? <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">{prefix}</span> : null}
       <input
         aria-label={label}
@@ -150,7 +150,7 @@ export function RekentoolWizard({
   };
 
   return (
-    <div className="mx-auto max-w-4xl overflow-hidden rounded-xl bg-background shadow-soft">
+    <div className="w-full overflow-hidden rounded-lg border border-border bg-background">
       <div className="border-b border-border p-6 sm:p-8">
         <div className="flex items-start gap-3">
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
