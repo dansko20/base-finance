@@ -56,7 +56,7 @@ export function MaximaleHypotheekTool() {
       question: "Koop je alleen of samen met je partner?",
       hint: "Bij samen kopen vragen we daarna ook het inkomen van je partner. Alleenstaanden kunnen onder voorwaarden extra leenruimte krijgen.",
       isAnswered: samenKopen !== null,
-      content: <JaNee label="Samen kopen" value={samenKopen} onSelect={(value) => { setSamenKopen(value); if (!value) set("aanvrager2", DEFAULT_INPUT.aanvrager2); }} />,
+      content: <ChoiceGrid label="Alleen of samen kopen" selected={samenKopen === null ? null : samenKopen ? "samen" : "alleen"} options={[{ value: "alleen", label: "Ik koop alleen" }, { value: "samen", label: "Ik koop samen met mijn partner" }]} onSelect={(choice) => { const value = choice === "samen"; setSamenKopen(value); if (!value) set("aanvrager2", DEFAULT_INPUT.aanvrager2); }} />,
     },
     {
       id: "salaris-1",
@@ -74,7 +74,7 @@ export function MaximaleHypotheekTool() {
     },
     {
       id: "ander-inkomen-1",
-      question: "Heb je daarnaast ander vast inkomen per jaar?",
+      question: "Hoeveel ander vast inkomen ontvang je per jaar?",
       hint: "Bijvoorbeeld een vaste toeslag, eindejaarsuitkering of vast overwerk. Vul € 0 in als je geen ander vast inkomen hebt.",
       isAnswered: answered.has("ander-inkomen-1"),
       content: otherIncome(1, "Ander vast inkomen per jaar"),
@@ -96,7 +96,7 @@ export function MaximaleHypotheekTool() {
       },
       {
         id: "ander-inkomen-2",
-        question: "Heeft je partner ander vast inkomen per jaar?",
+        question: "Hoeveel ander vast inkomen ontvangt je partner per jaar?",
         hint: "Bijvoorbeeld een vaste toeslag of eindejaarsuitkering. Vul € 0 in als dit niet zo is.",
         isAnswered: answered.has("ander-inkomen-2"),
         content: otherIncome(2, "Ander vast inkomen partner per jaar"),
@@ -104,14 +104,14 @@ export function MaximaleHypotheekTool() {
     ] : []),
     {
       id: "roodstand",
-      question: "Wat is de gezamenlijke limiet van jullie roodstand?",
+      question: samenKopen ? "Wat is jullie totale roodstandlimiet?" : "Wat is je totale roodstandlimiet?",
       hint: "Ook als je nooit roodstaat, telt de volledige limiet mee. Vul € 0 in als je geen roodstand kunt nemen.",
       isAnswered: answered.has("roodstand"),
       content: <NumberQuestion label="Limiet roodstand" value={input.roodstandLimiet} onAnswer={() => answer("roodstand")} onChange={(value) => set("roodstandLimiet", value)} />,
     },
     {
       id: "leningen",
-      question: "Wat is het totaal van jullie andere leningen?",
+      question: samenKopen ? "Wat is het totaalbedrag van jullie andere leningen?" : "Wat is het totaalbedrag van je andere leningen?",
       hint: "Bijvoorbeeld een doorlopend krediet, persoonlijke lening of private lease. Vul € 0 in als je deze leningen niet hebt.",
       isAnswered: answered.has("leningen"),
       content: <NumberQuestion label="Andere leningen" value={input.andereLeningen} onAnswer={() => answer("leningen")} onChange={(value) => set("andereLeningen", value)} />,
