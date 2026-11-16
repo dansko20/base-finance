@@ -9,6 +9,7 @@ import dienstBeleggen from "@/assets/beleggen-man-laptop-voorkant.jpg";
 
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillAnchor, PillLink } from "@/components/site/PillButton";
+import { RapportPreview } from "@/components/site/RapportPreview";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -265,6 +266,8 @@ function Home_() {
           </Reveal>
         </div>
       </section>
+
+      <RapportPreview />
 
       {/* CTA */}
       <section className="section-y bg-surface">
