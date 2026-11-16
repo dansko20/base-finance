@@ -22,6 +22,7 @@ import { Route as PlanEenGesprekRouteImport } from './routes/plan-een-gesprek'
 import { Route as RekentoolsRouteImport } from './routes/rekentools'
 import { Route as TarievenRouteImport } from './routes/tarieven'
 import { Route as WerkwijzeRouteImport } from './routes/werkwijze'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,6 +89,11 @@ const WerkwijzeRoute = WerkwijzeRouteImport.update({
   path: '/werkwijze',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/rekentools': typeof RekentoolsRoute
   '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/rekentools': typeof RekentoolsRoute
   '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/rekentools': typeof RekentoolsRoute
   '/tarieven': typeof TarievenRoute
   '/werkwijze': typeof WerkwijzeRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/rekentools'
     | '/tarieven'
     | '/werkwijze'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/rekentools'
     | '/tarieven'
     | '/werkwijze'
+    | '/api/chat'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/rekentools'
     | '/tarieven'
     | '/werkwijze'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   RekentoolsRoute: typeof RekentoolsRoute
   TarievenRoute: typeof TarievenRoute
   WerkwijzeRoute: typeof WerkwijzeRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WerkwijzeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   RekentoolsRoute: RekentoolsRoute,
   TarievenRoute: TarievenRoute,
   WerkwijzeRoute: WerkwijzeRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
