@@ -79,7 +79,7 @@ export function SparenOfBeleggenTool() {
     },
     {
       id: "schulden",
-      question: "Heb je schulden die in box 3 vallen?",
+      question: "Wat is het totaalbedrag van je schulden in box 3?",
       hint: "Bijvoorbeeld een consumptief krediet. Je hypotheek voor je eigen huis hoort hier niet bij. Vul € 0 in zonder box 3-schulden.",
       isAnswered: answered.has("schulden"),
       content: money("schulden", "schulden", "Schulden in box 3"),

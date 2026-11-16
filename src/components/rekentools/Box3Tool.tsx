@@ -29,7 +29,7 @@ export function Box3Tool() {
     },
     {
       id: "spaargeld",
-      question: "Hoeveel spaargeld hebben jullie op 1 januari 2026?",
+      question: input.fiscalePartner ? "Hoeveel spaargeld hebben jullie samen op 1 januari 2026?" : "Hoeveel spaargeld heb je op 1 januari 2026?",
       hint: "Tel alle bank- en spaartegoeden in box 3 bij elkaar. Je eigen huis hoort hier niet bij.",
       isAnswered: answered.has("spaargeld"),
       content: money("spaargeld", "spaargeld", "Totaal spaargeld"),
@@ -57,7 +57,7 @@ export function Box3Tool() {
     },
     {
       id: "schulden",
-      question: "Heb je schulden die in box 3 vallen?",
+      question: "Wat is het totaalbedrag van je schulden in box 3?",
       hint: "Bijvoorbeeld een consumptief krediet. Je hypotheek voor je eigen huis valt in box 1 en vul je hier niet in. Vul € 0 in zonder box 3-schulden.",
       isAnswered: answered.has("schulden"),
       content: money("schulden", "schulden", "Schulden in box 3"),
