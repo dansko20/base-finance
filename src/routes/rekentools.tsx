@@ -40,7 +40,7 @@ function Rekentools() {
           </Reveal>
         </div>
       </section>
-      <section className="bg-surface px-5 py-6 sm:px-8">
+      <section className="bg-background px-5 py-6 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
           <div role="tablist" aria-label="Kies een rekentool" className="inline-flex max-w-full flex-wrap gap-1 rounded-lg bg-background p-1 text-sm">
             {tools.map((tool) => (
@@ -60,7 +60,7 @@ function Rekentools() {
           </div>
         </div>
       </section>
-      <section className="bg-surface px-5 pb-24 pt-8 sm:px-8">
+      <section className="bg-background px-5 pb-24 pt-8 sm:px-8">
         <div className="mx-auto max-w-[1400px]">
           <div role="tabpanel" id={`panel-${activeTool}`} aria-labelledby={`tab-${activeTool}`}>
             {activeTool === "hypotheek" ? <MaximaleHypotheekTool /> : null}
