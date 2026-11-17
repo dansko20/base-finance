@@ -2,7 +2,7 @@
 
 - [x] Maak het invulblok van de rekentools breder, lijn het uit met de toolkeuze en verwijder de grijze achtergrond.
 
-- [ ] Bouw de hypotheektool om tot een vraag-voor-vraag-flow zonder tussentijdse uitkomst.
+- [x] Bouw de hypotheektool om tot een vraag-voor-vraag-flow zonder tussentijdse uitkomst.
 - [ ] Voeg de tools Sparen of beleggen en Box 3-belasting toe op basis van de aangeleverde Excel.
 - [ ] Toets de box 3-berekeningen aan Excel en controleer alle drie de flows op desktop en mobiel.
 
@@ -26,3 +26,4 @@
 - [x] Vervang de hypotheektool door de korte bezoekersversie uit het aangeleverde Excel-bestand
 - [x] Voeg Danilo, Huub, Eliezer, Marrouane en Charlotte toe aan Onze adviseurs
 - [x] Beperk alle diensten en formulierkeuzes tot hypotheekadvies en beleggingsadvies
+- [x] Fondsselectie naar ASN, BNP Paribas, Robeco + BASE FONDS, gelijke logo's, Lees meer-pop-ups en hypotheekuitleg
