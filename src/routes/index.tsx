@@ -10,6 +10,7 @@ import dienstBeleggen from "@/assets/beleggen-man-laptop-voorkant.jpg";
 import { Reveal, CountUp } from "@/components/site/motion";
 import { PillAnchor, PillLink } from "@/components/site/PillButton";
 import { RapportPreview } from "@/components/site/RapportPreview";
+import { PartnerStrip } from "@/components/site/PartnerStrip";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -266,6 +267,8 @@ function Home_() {
           </Reveal>
         </div>
       </section>
+
+      <PartnerStrip />
 
       <RapportPreview />
 

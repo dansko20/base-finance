@@ -15,6 +15,7 @@ import { Route as BeleggingsadviesRouteImport } from './routes/beleggingsadvies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactgegevensRouteImport } from './routes/contactgegevens'
 import { Route as DienstenRouteImport } from './routes/diensten'
+import { Route as DuurzaamheidRouteImport } from './routes/duurzaamheid'
 import { Route as HypotheekadviesRouteImport } from './routes/hypotheekadvies'
 import { Route as OnzePartnersRouteImport } from './routes/onze-partners'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
@@ -52,6 +53,11 @@ const ContactgegevensRoute = ContactgegevensRouteImport.update({
 const DienstenRoute = DienstenRouteImport.update({
   id: '/diensten',
   path: '/diensten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DuurzaamheidRoute = DuurzaamheidRouteImport.update({
+  id: '/duurzaamheid',
+  path: '/duurzaamheid',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HypotheekadviesRoute = HypotheekadviesRouteImport.update({
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
+  '/duurzaamheid': typeof DuurzaamheidRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
   '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
+  '/duurzaamheid': typeof DuurzaamheidRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
   '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/contactgegevens': typeof ContactgegevensRoute
   '/diensten': typeof DienstenRoute
+  '/duurzaamheid': typeof DuurzaamheidRoute
   '/hypotheekadvies': typeof HypotheekadviesRoute
   '/onze-partners': typeof OnzePartnersRoute
   '/over-ons': typeof OverOnsRoute
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/contactgegevens'
     | '/diensten'
+    | '/duurzaamheid'
     | '/hypotheekadvies'
     | '/onze-partners'
     | '/over-ons'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/contactgegevens'
     | '/diensten'
+    | '/duurzaamheid'
     | '/hypotheekadvies'
     | '/onze-partners'
     | '/over-ons'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/contactgegevens'
     | '/diensten'
+    | '/duurzaamheid'
     | '/hypotheekadvies'
     | '/onze-partners'
     | '/over-ons'
@@ -202,6 +214,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ContactgegevensRoute: typeof ContactgegevensRoute
   DienstenRoute: typeof DienstenRoute
+  DuurzaamheidRoute: typeof DuurzaamheidRoute
   HypotheekadviesRoute: typeof HypotheekadviesRoute
   OnzePartnersRoute: typeof OnzePartnersRoute
   OverOnsRoute: typeof OverOnsRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/diensten'
       fullPath: '/diensten'
       preLoaderRoute: typeof DienstenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/duurzaamheid': {
+      id: '/duurzaamheid'
+      path: '/duurzaamheid'
+      fullPath: '/duurzaamheid'
+      preLoaderRoute: typeof DuurzaamheidRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hypotheekadvies': {
@@ -322,6 +342,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ContactgegevensRoute: ContactgegevensRoute,
   DienstenRoute: DienstenRoute,
+  DuurzaamheidRoute: DuurzaamheidRoute,
   HypotheekadviesRoute: HypotheekadviesRoute,
   OnzePartnersRoute: OnzePartnersRoute,
   OverOnsRoute: OverOnsRoute,

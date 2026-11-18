@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ArrowUpRight, Calculator, CalendarDays, ChartNoAxesCombined, CheckSquare, ChevronDown, Home, Menu, Phone, Users, X, Receipt, Handshake } from "lucide-react";
+import { ArrowUpRight, Calculator, CalendarDays, ChartNoAxesCombined, CheckSquare, ChevronDown, Home, Menu, Phone, Users, X, Receipt, Handshake, Leaf } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
@@ -18,6 +18,7 @@ const groups: Record<MenuName, { label: string; entries: Entry[] }> = {
     { label: "Over ons", description: "Wie we zijn en waarom we dit doen.", to: "/over-ons", icon: Users },
     { label: "Onze werkwijze", description: "Stap voor stap hoe een adviestraject verloopt.", to: "/werkwijze", icon: CheckSquare },
     { label: "Onze partners", description: "Met wie we werken en waarom.", to: "/onze-partners", icon: Handshake },
+    { label: "Duurzaamheid", description: "Onze groene impact en bomen in Ivoorkust.", to: "/duurzaamheid", icon: Leaf },
   ] },
   kennis: { label: "Kennismaken", entries: [
     { label: "Plan een gesprek", description: "Kies een moment voor een vrijblijvende kennismaking.", to: "/plan-een-gesprek", icon: CalendarDays },

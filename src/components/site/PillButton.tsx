@@ -15,7 +15,8 @@ export type AppPath =
   | "/contactgegevens"
   | "/tarieven"
   | "/onze-partners"
-  | "/algemene-voorwaarden";
+  | "/algemene-voorwaarden"
+  | "/duurzaamheid";
 
 type Variant = "primary" | "outline" | "ghost";
 
