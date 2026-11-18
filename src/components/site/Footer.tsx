@@ -10,6 +10,7 @@ const menu: { to: AppPath; label: string }[] = [
   { to: "/werkwijze", label: "Onze werkwijze" },
   { to: "/tarieven", label: "Tarieven" },
   { to: "/onze-partners", label: "Onze partners" },
+  { to: "/duurzaamheid", label: "Duurzaamheid" },
   { to: "/algemene-voorwaarden", label: "Algemene voorwaarden" },
   { to: "/contactgegevens", label: "Contact" },
 ];
